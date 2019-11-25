@@ -82,6 +82,7 @@ funcs=(煮饭
 
 select choice in ${funcs[@]};
 do
+	echo "开始时间：$(date +%F-%R)"
 	speak "$choice"
 	eval $choice
 	break
