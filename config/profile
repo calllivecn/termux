@@ -1,0 +1,6 @@
+
+export LANG=zh_CN.UTF-8
+
+if [ -d ~/bin ];then
+	export PATH=$PATH:~/bin
+fi

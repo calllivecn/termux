@@ -1,0 +1,18 @@
+[user]
+	email = c-all@qq.com
+	name = calllivecn
+[core]
+	editor = vim
+	quotepath = false
+[alias]
+	s = status
+	cm = commit
+	b = branch
+	lg = log --graph
+	l = log -n 20 --graph
+	lgo = log --graph --pretty=oneline --abbrev-commit
+	ch = checkout
+[push]
+	default = simple
+[log]
+	date = format:%Y-%m-%d %H:%M:%S
