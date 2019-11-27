@@ -3,6 +3,7 @@ termux-api
 termux-exec
 termux-tools
 
+bash-completion
 wget
 curl
 dpkg
@@ -17,3 +18,4 @@ tmux
 zx-utils
 zip
 vim
+pv
