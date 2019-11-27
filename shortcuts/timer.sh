@@ -79,11 +79,19 @@ funcs=(煮饭
 	烧洗澡水
 	测试一下)
 
+main(){
+	PS3="输入数字选择："
+	select choice in ${funcs[@]};
+	do
+		echo "开始时间：$(date +%F-%R)"
+		speak "$choice"
+		#eval $choice
+		$choice
+		break
+	done
+}
 
-select choice in ${funcs[@]};
-do
-	echo "开始时间：$(date +%F-%R)"
-	speak "$choice"
-	eval $choice
-	break
-done
+
+termux-wake-lock
+main
+termux-wake-unlock
