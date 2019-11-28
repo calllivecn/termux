@@ -43,6 +43,10 @@ copy config/git.globalconfig $HOME/.gitconfig
 
 copy_dir shortctus $HOME/.shortctus
 
+[ -d $HOME/.termux ] || mkdir $HOME/.termux
+
+copy termux.properties
+
 if [ -d $HOME/bin ];then
 	copy termux-backup.sh $HOME/bin
 else
