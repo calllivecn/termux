@@ -18,9 +18,9 @@ OUTFILE_sha256="termux-backup-$(date +%F).tar.gz.sha256"
 
 apt clean
 
-cd
+SYS="$PREFIX/usr"
 
-cd ..
+HOME="home"
 
-tar --exclude home/.cache --exclude */__pycache__ -zcvO . | tee "$sdcard/$OUTFILE" |sha256sum |awk -v filename="$OUTFILE" '{print $1,filename}' |tee "$sdcard/$OUTFILE_sha256"
+tar -C $PREFIX --exclude $SYS --exclude $HOME --exclude */__pycache__ -zcvO . | tee "$sdcard/$OUTFILE" |sha256sum |awk -v filename="$OUTFILE" '{print $1,filename}' |tee "$sdcard/$OUTFILE_sha256"
 
