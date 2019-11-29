@@ -1,2 +1,6 @@
-termux-wake-lock
-sshd
+#!/bin/bash
+
+
+. $HOME/bin/liblock.sh
+
+sshd -D

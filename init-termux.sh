@@ -47,11 +47,14 @@ copy_dir shortcuts $HOME/.shortcuts
 
 copy termux.properties
 
+
 if [ -d $HOME/bin ];then
 	copy termux-backup.sh $HOME/bin
+	copy liblock.sh $HOME/bin
 else
 	mkdir -v $HOME/bin
 	copy termux-backup.sh $HOME/bin
+	copy liblock.sh $HOME/bin
 fi
 
 SOURCES=$PREFIX/etc/apt/sources.list
