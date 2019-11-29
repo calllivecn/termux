@@ -2,6 +2,7 @@
 # date 2019-11-25 21:21:14
 # author calllivecn <c-all@qq.com>
 
+. $HOME/bin/liblock.sh
 
 speak(){
 	termux-tts-speak "$@"
