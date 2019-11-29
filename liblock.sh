@@ -30,7 +30,7 @@ WAKEUP_UNLOCK(){
 		return 1
 	fi
 
-	if [ $APPS -eq 1 ];then
+	if [ $APPS -eq 0 ];then
 		termux-wake-unlock
 		rm $WAKEUP_LOCK
 	else
