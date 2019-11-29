@@ -41,7 +41,7 @@ copy config/vimrc $HOME/.vimrc
 copy config/git.globalconfig $HOME/.gitconfig
 
 
-copy_dir shortctus $HOME/.shortctus
+copy_dir shortcuts $HOME/.shortcuts
 
 [ -d $HOME/.termux ] || mkdir $HOME/.termux
 
@@ -56,12 +56,12 @@ fi
 
 SOURCES=$PREFIX/etc/apt/sources.list
 
-if [ -f $SOURCES ];then
+if grep -qE "https://termux.org/" $SOURCES;then
 	mv -v $SOURCES "${SOURCES}-bak"
+	echo "deb https://mirrors.tuna.tsinghua.edu.cn/termux stable main" > $SOURCES
 fi
 
-echo "deb https://mirrors.tuna.tsinghua.edu.cn/termux stable main" > $SOURCES
 
-apt update
+#apt update
 
 
