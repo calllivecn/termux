@@ -18,23 +18,24 @@ say_date(){
 
 say(){
 
-	local i
-
-	for i in {1..3}
-	do
-		speak "$1"
-		sleep 1
-	done
+	speak "$1"
+	sleep 1
+	speak "$1"
+	sleep 1.5
+	speak "$1"
 }
 
 
 confirm(){
 	# 每5分钟，提示一次，提示5次。
-	for i in $(seq 1 5);
+	for i in $(seq 1 4);
 	do
-		say "$1"
-		sleep 300
+		speak "$1"
+		sleep 3
+		#sleep 300
 	done
+
+	speak "$1"
 
 }
 
@@ -71,7 +72,8 @@ confirm(){
 }
 
 测试一下(){
-	speak "测试一下"
+	#speak "测试一下 say"
+	confirm "听听这句话的等待时间"
 }
 
 funcs=(煮饭
@@ -85,14 +87,11 @@ main(){
 	select choice in ${funcs[@]};
 	do
 		echo "开始时间：$(date +%F-%R)"
-		speak "$choice"
-		#eval $choice
+		speak "执行任务: $choice"
 		$choice
 		break
 	done
 }
 
 
-termux-wake-lock
 main
-termux-wake-unlock
