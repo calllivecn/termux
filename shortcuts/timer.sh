@@ -46,12 +46,30 @@ confirm(){
 	say "饭好了"
 }
 
+煮稀饭(){
+
+	local enter
+
+	echo "10分钟后打开盖子。"
+	speak "请10分钟后打开盖子。"
+	sleep $[10*60]
+	say "稀饭要开盖了"
+	echo "已经打开(按回车):"
+	read enter
+	speak "20分钟后会煮好。"
+	sleep $[20*60]
+	echo "现在关闭电源，合上盖子，闷5分钟。(按回车开始计时):"
+	read enter
+	sleep $[5*60]
+	say "稀饭好了！！！"
+}
+
 洗衣服(){
 	local t
 
 	read -t 5 -p "输入洗衣时间(单位分钟,默认40分钟)：" t
 	
-	t=${t:-40}
+	t=${t:-50}
 
 	echo "当前洗衣时间：$t"
 
@@ -77,6 +95,7 @@ confirm(){
 }
 
 funcs=(煮饭
+	煮稀饭
 	洗衣服
 	烧喝的水
 	烧洗澡水
