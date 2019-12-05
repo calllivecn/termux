@@ -78,7 +78,7 @@ class Weather:
     def show(self, days=3):
         print(f'地区：{self.cityinfo["parent"]} {self.cityinfo["city"]}')
         print(f'更新时间：{self.jd["time"]}')
-        print(f'当前温度:{self.air["wendu"]}℃  湿度:{self.air["shidu"]} PM2.5:{self.air["pm25"]} PM10:{self.air["pm10"]} 优良:{self.air["quality"]}')
+        print(f'当前温度:{self.air["wendu"]}℃  湿度:{self.air["shidu"]} PM2.5:{self.air["pm25"]} PM10:{self.air["pm10"]} 空气:{self.air["quality"]}')
         print("#"*40)
         
         for fc in self.forecast:
