@@ -55,10 +55,12 @@ confirm(){
 	sleep $[10*60]
 	say "稀饭要开盖了"
 	echo "已经打开(按回车):"
+	date +%F-%R
 	read enter
 	speak "20分钟后会煮好。"
 	sleep $[20*60]
 	echo "现在关闭电源，合上盖子，闷5分钟。(按回车开始计时):"
+	date +%F-%R
 	read enter
 	sleep $[5*60]
 	say "稀饭好了！！！"
