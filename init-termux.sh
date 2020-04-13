@@ -32,6 +32,13 @@ copy_dir(){
 	fi
 }
 
+if [ -d $HOME/.pip ];then
+	cp -va config/pip.conf $HOME/.pip/
+else
+	mkdir $HOME/.pip
+	cp -va config/pip.conf $HOME/.pip/
+fi
+
 cp -va config/profile $HOME/.profile
 
 cp -va config/bashrc $HOME/.bashrc
