@@ -45,7 +45,7 @@ copy_dir shortcuts $HOME/.shortcuts
 
 [ -d $HOME/.termux ] || mkdir $HOME/.termux
 
-copy termux.properties
+cp -va termux.properties .termux/
 
 
 if [ -d $HOME/bin ];then
