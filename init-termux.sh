@@ -32,13 +32,13 @@ copy_dir(){
 	fi
 }
 
-copy config/profile $HOME/.profile
+cp -va config/profile $HOME/.profile
 
-copy config/bashrc $HOME/.bashrc
+cp -va config/bashrc $HOME/.bashrc
 
-copy config/vimrc $HOME/.vimrc
+cp -va config/vimrc $HOME/.vimrc
 
-copy config/git.globalconfig $HOME/.gitconfig
+cp -va config/git.globalconfig $HOME/.gitconfig
 
 
 copy_dir shortcuts $HOME/.shortcuts
@@ -49,22 +49,27 @@ copy termux.properties
 
 
 if [ -d $HOME/bin ];then
-	copy termux-backup.sh $HOME/bin
-	copy liblock.sh $HOME/bin
+	cp -va termux-backup.sh $HOME/bin
+	cp -va liblock.sh $HOME/bin
 else
 	mkdir -v $HOME/bin
-	copy termux-backup.sh $HOME/bin
-	copy liblock.sh $HOME/bin
+	cp -va termux-backup.sh $HOME/bin
+	cp -va liblock.sh $HOME/bin
 fi
 
 SOURCES=$PREFIX/etc/apt/sources.list
 
-if grep -qE "https://termux.org/" $SOURCES;then
-	mv -v $SOURCES "${SOURCES}-bak"
-	echo "deb https://mirrors.tuna.tsinghua.edu.cn/termux stable main" > $SOURCES
-fi
+#if grep -qE "https://termux.org/" $SOURCES;then
+#	mv -v $SOURCES "${SOURCES}-bak"
+#	echo "deb https://mirrors.tuna.tsinghua.edu.cn/termux stable main" > $SOURCES
+#fi
 
 
-#apt update
+install_deb(){
+	apt install $(grep -Ev '^#|^$' termux-packages-backup.txt |tr '\n' ' ')
+}
 
+apt update
+
+install_deb
 
