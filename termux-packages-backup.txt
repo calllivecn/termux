@@ -1,4 +1,4 @@
-terumx-am
+termux-am
 termux-api
 termux-exec
 termux-tools
