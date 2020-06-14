@@ -130,7 +130,7 @@ main(){
 	select choice in ${funcs[@]};
 	do
 		echo "开始时间：$(date +%F-%R)"
-		speak "执行任务: $choice"
+		speak "执行任务: $choice" &
 		$choice
 		break
 	done
