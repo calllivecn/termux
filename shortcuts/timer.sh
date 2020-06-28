@@ -47,20 +47,8 @@ confirm(){
 }
 
 煮稀饭(){
-
-	local enter
-
-	echo "10分钟后打开盖子。"
-	speak "请10分钟后打开盖子。"
-	sleep $[10*60]
-	say "稀饭要开盖了"
-	echo "已经打开(按回车):"
-	read enter
-	speak "20分钟后会煮好。"
-	sleep $[20*60]
-	echo "现在关闭电源，合上盖子，闷5分钟。(按回车开始计时):"
-	read enter
-	sleep $[5*60]
+	speak "35分钟后会煮好。"
+	sleep $[35*60]
 	say "稀饭好了！！！"
 }
 
@@ -106,7 +94,7 @@ main(){
 	select choice in ${funcs[@]};
 	do
 		echo "开始时间：$(date +%F-%R)"
-		speak "执行任务: $choice"
+		speak "执行任务: $choice" &
 		$choice
 		break
 	done
