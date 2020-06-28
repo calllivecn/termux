@@ -27,15 +27,17 @@ copy(){
 copy_dir(){
 
 	if [ -d "$1" ];then
+		:
+	else
 		echo "$1 要复制的目录不存在..." >&2
 		return 
 	fi
 
 	if [ -d "$2" ];then
+		cp -va "$1" "$2"
+	else
 		echo "$2 目标目录不存在..." >&2
 		return 
-	else
-		cp -va "$1" "$2"
 	fi
 }
 
@@ -50,8 +52,6 @@ update_apt_sources(){
 
 #apt update
 
-
-
 CONFIG="${PROGRAM_DIR}/config"
 
 copy $CONFIG/profile $HOME/.profile
@@ -62,13 +62,17 @@ copy $CONFIG/vimrc $HOME/.vimrc
 
 copy $CONFIG/git.globalconfig $HOME/.gitconfig
 
-copy_dir ${PROGRAM_DIR}/shortcuts $HOME/.shortcuts
-
-
 [ -d $HOME/.termux ] || mkdir $HOME/.termux
+copy ${CONFIG}/termux.properties $HOME/.termux/
 
-copy ${PROGRAM_DIR}/termux.properties $HOME/.termux/
-
+if [ -d $HOME/.shortcuts ];then
+	for f in ${PROGRAM_DIR}/shortcuts/*
+	do
+		cp -v "$f" $HOME/.shortcuts/
+	done
+else
+	copy_dir ${PROGRAM_DIR}/shortcuts $HOME/.shortcuts
+fi
 
 copy_dir $PROGRAM_DIR/bin/ $HOME/
 

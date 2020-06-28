@@ -1,6 +1,8 @@
 #!/bin/bash
 
-
 . $HOME/bin/liblock.sh
+
+
+ip a s wlan0
 
 sshd -D
