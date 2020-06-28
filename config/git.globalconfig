@@ -8,8 +8,8 @@
 	s = status
 	cm = commit
 	b = branch
-	lg = log --graph
-	l = log -n 20 --graph
+	lg = log --graph --name-status
+	l = lg -n 20 
 	lgo = log --graph --pretty=oneline --abbrev-commit
 	ch = checkout
 [push]
