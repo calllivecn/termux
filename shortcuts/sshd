@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. $HOME/bin/liblock.sh
+. $HOME/.shortcuts/liblock.sh
 
 
 ip a s wlan0
