@@ -3,8 +3,7 @@
 # author calllivecn <c-all@qq.com>
 
 
-PROXY_ADDR="http://127.0.0.1:9999"
-PROXY_ADDR="http://192.168.13.105:9999"
+PROXY_ADDR="http://192.168.9.1:9999"
 
 URLs="termux.org
 dl.bintray.com"
