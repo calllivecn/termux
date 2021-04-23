@@ -2,7 +2,7 @@
 # date 2019-11-28 00:49:30
 # author calllivecn <c-all@qq.com>
 
-. $HOME/bin/liblock.sh
+. $HOME/.shortcuts/liblock.sh
 
 
 termux-torch on
