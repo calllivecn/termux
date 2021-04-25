@@ -1,4 +1,4 @@
-terumx-am
+termux-am
 termux-api
 termux-exec
 termux-tools
@@ -15,7 +15,6 @@ python
 rsync
 tracepath
 tmux
-zx-utils
 zip
 vim
 pv
