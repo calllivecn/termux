@@ -14,7 +14,7 @@ adb_connect(){
 	while :
 	do
 		if ssh ten "adb devices" |grep -P "$CONNECT\tdevice";then
-			echo -e "\033[32madb 已连接~\033[0m"
+			echo -e "\033[32madb 已连接~ $(date "+%F %R:%S")\033[0m"
 		else
 
 			echo -e "\033[31madb connect 重试...\033[0m"
@@ -24,7 +24,7 @@ adb_connect(){
 
 		fi
 			
-		sleep 60
+		sleep 300
 	done
 
 }
@@ -39,7 +39,7 @@ forward(){
 		ssh -vNR 127.0.0.1:15555:127.0.0.1:15555 ten
 		echo -e "\033[32msleep 5...\033[0m"
 		sleep 5
-		echo -e "\033[31mconnect 断开重连 第${c}次\033[0m"
+		echo -e "\033[31mconnect 断开重连 第${c}次 时间：$(date "+%F %R:%S")\033[0m"
 	done
 }
 
