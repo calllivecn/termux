@@ -72,17 +72,17 @@ class Weather:
         self.__weather()
 
     def savefile(self, filename):
-        with open("filename", "w") as f:
-           f.write(json.dumps(jd, ensure_ascii=False, indent=4))
+        with open(filename, "w") as f:
+           f.write(json.dumps(self.jd, ensure_ascii=False, indent=4))
 
     def show(self, days=3):
         print(f'地区：{self.cityinfo["parent"]} {self.cityinfo["city"]}')
         print(f'更新时间：{self.jd["time"]}')
-        print(f'当前温度:{self.air["wendu"]}℃  湿度:{self.air["shidu"]} PM2.5:{self.air["pm25"]} PM10:{self.air["pm10"]} 优良:{self.air["quality"]}')
+        print(f'当前温度:{self.air["wendu"]}℃  湿度:{self.air["shidu"]} PM2.5:{self.air["pm25"]} PM10:{self.air["pm10"]} 空气:{self.air["quality"]}')
         print("#"*40)
         
         for fc in self.forecast:
-            print(f'日期：{fc["ymd"]} {fc["week"]} 空气:{fc["type"]}\n'
+            print(f'日期：{fc["ymd"]} {fc["week"]} 天气:{fc["type"]}\n'
             f'最{fc["high"]}  最{fc["low"]}\n'
             f'风速:{fc["fl"]} 风向:{fc["fx"]}\n'
             f'日出 {fc["sunrise"]} 日落 {fc["sunset"]}\n'
@@ -99,3 +99,5 @@ class Weather:
 shenzhen = Weather(深圳)
 
 shenzhen.show()
+
+shenzhen.savefile("shenzhen.json")
