@@ -36,7 +36,10 @@ forward(){
 	do
 		c=$[c + 1]
 		echo -e "\033[32mconnect... ten\033[0m"
-		ssh -vNR 127.0.0.1:15555:127.0.0.1:15555 ten
+		ssh -fR 127.0.0.1:15555:127.0.0.1:15555 ten "while :;do date +%F-%R:%S;sleep 35;done"
+		PID=$!
+		echo -e "\033[32m进程PID: $PID\033[0m"
+		wait $PID
 		echo -e "\033[32msleep 5...\033[0m"
 		sleep 5
 		echo -e "\033[31mconnect 断开重连 第${c}次 时间：$(date "+%F %R:%S")\033[0m"
