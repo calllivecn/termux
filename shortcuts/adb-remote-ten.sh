@@ -7,6 +7,13 @@ termux-wake-lock
 
 CONNECT="127.0.0.1:15555"
 
+safe_exit(){
+	kill $PID
+	exit 2
+}
+
+trap safe_exit SIGINT
+
 adb_connect(){
 
 	sleep 5
@@ -36,7 +43,7 @@ forward(){
 	do
 		c=$[c + 1]
 		echo -e "\033[32mconnect... ten\033[0m"
-		ssh -fR 127.0.0.1:15555:127.0.0.1:15555 ten "while :;do date +%F-%R:%S;sleep 35;done"
+		ssh -vR 127.0.0.1:15555:127.0.0.1:15555 ten "while :;do date +%F-%R:%S;sleep 35;done" &
 		PID=$!
 		echo -e "\033[32m进程PID: $PID\033[0m"
 		wait $PID
@@ -49,3 +56,4 @@ forward(){
 adb_connect &
 
 forward
+
