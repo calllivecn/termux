@@ -41,7 +41,6 @@ copy_dir(){
 	fi
 }
 
-<<<<<<< HEAD
 update_apt_sources(){
 	SOURCES=$PREFIX/etc/apt/sources.list
 	
@@ -51,25 +50,9 @@ update_apt_sources(){
 	fi
 }
 
-#apt update
-
 CONFIG="${PROGRAM_DIR}/config"
-=======
-if [ -d $HOME/.pip ];then
-	cp -va config/pip.conf $HOME/.pip/
-else
-	mkdir $HOME/.pip
-	cp -va config/pip.conf $HOME/.pip/
-fi
 
-cp -va config/profile $HOME/.profile
-
-cp -va config/bashrc $HOME/.bashrc
-
-cp -va config/vimrc $HOME/.vimrc
-
-cp -va config/git.globalconfig $HOME/.gitconfig
->>>>>>> origin/devel
+copy config/pip.conf $HOME/.pip/
 
 copy $CONFIG/profile $HOME/.profile
 
@@ -77,16 +60,10 @@ copy $CONFIG/bashrc $HOME/.bashrc
 
 copy $CONFIG/vimrc $HOME/.vimrc
 
-<<<<<<< HEAD
 copy $CONFIG/git.globalconfig $HOME/.gitconfig
-=======
-cp -va termux.properties .termux/
->>>>>>> origin/devel
 
-[ -d $HOME/.termux ] || mkdir $HOME/.termux
 copy ${CONFIG}/termux.properties $HOME/.termux/
 
-<<<<<<< HEAD
 if [ -d $HOME/.shortcuts ];then
 	for f in ${PROGRAM_DIR}/shortcuts/*
 	do
@@ -97,23 +74,13 @@ else
 fi
 
 copy_dir $PROGRAM_DIR/bin/ $HOME/
-=======
-if [ -d $HOME/bin ];then
-	cp -va termux-backup.sh $HOME/bin
-	cp -va liblock.sh $HOME/bin
-else
-	mkdir -v $HOME/bin
-	cp -va termux-backup.sh $HOME/bin
-	cp -va liblock.sh $HOME/bin
-fi
 
 SOURCES=$PREFIX/etc/apt/sources.list
 
-#if grep -qE "https://termux.org/" $SOURCES;then
-#	mv -v $SOURCES "${SOURCES}-bak"
-#	echo "deb https://mirrors.tuna.tsinghua.edu.cn/termux stable main" > $SOURCES
-#fi
-
+if grep -qE "https://termux.org/" $SOURCES;then
+	mv -v $SOURCES "${SOURCES}-bak"
+	echo "deb https://mirrors.tuna.tsinghua.edu.cn/termux stable main" > $SOURCES
+fi
 
 install_deb(){
 	apt install $(grep -Ev '^#|^$' termux-packages-backup.txt |tr '\n' ' ')
@@ -122,5 +89,4 @@ install_deb(){
 apt update
 
 install_deb
->>>>>>> origin/devel
 
