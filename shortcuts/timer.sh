@@ -46,11 +46,6 @@ confirm(){
 	say "饭好了"
 }
 
-<<<<<<< HEAD
-煮稀饭(){
-	speak "35分钟后会煮好。"
-	sleep $[35*60]
-=======
 煮稀饭_old(){
 
 	local enter
@@ -76,7 +71,6 @@ confirm(){
 
 	echo "稀饭好了！！！"
 	echo "当前时间：$(date +%F-%R)"
->>>>>>> origin/devel
 	say "稀饭好了！！！"
 }
 
