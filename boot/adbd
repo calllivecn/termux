@@ -1,0 +1,3 @@
+# install --> ~/.termux/boot/adbd
+
+su -l -c "setprop service.adb.tcp.port 15555;/data/data/adbd"
