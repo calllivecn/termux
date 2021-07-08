@@ -25,7 +25,8 @@ alarm(){
 RAND=$[RANDOM%10]
 
 # 19:50
-T=1950
+T1=0945
+T2=1950
 
 # sign
 s=$[RANDOM%2]
@@ -41,11 +42,12 @@ fi
 while :
 do
 	timestamp=$(date +%H%M)
-	if [ "$timestamp" = "$T" ] && [ $END = 0 ];then
-		alarm
-	elif [ "$timestamp" != "$T" ] && [ $END = 1 ];then
-		END=0
+	if [ "$timestamp" = "$T1" ] || [ "$timestamp" = "$T2" ];then
+		if [ $END = 0 ];then
+			alarm
+		elif [ $END = 1 ];then
+			END=0
+		fi
 	fi
-	sleep 10
-	#sleep 50
+	sleep 50
 done
