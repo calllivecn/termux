@@ -40,8 +40,8 @@ def alarm():
         time.sleep(3)
 
 
-def rand(number=10):
-    return random.choice(range(-number, number))
+def rand(number=10, interval=3):
+    return random.choice(range(-number, number + interval, interval))
 
 
 def rand_time():
@@ -77,9 +77,12 @@ T_rand = rand_time()
 #test_t = [(1, 2), (1, 3)]
 #T_rand = test_t
 
+hour = None
 while True:
     cur = datetime.now()
-    print((cur.hour, cur.minute))
+    if hour != cur.hour:
+        print((cur.hour, cur.minute))
+        hour = cur.hour
 
     if len(T_rand) <= 0:
         T_rand = rand_time()
