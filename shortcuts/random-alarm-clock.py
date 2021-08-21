@@ -16,9 +16,9 @@ from datetime import (
 # 闹钟时间
 
 T=(
-        (9, 50), # 09:55
-        (19, 45), # 19:45
-        )
+    (9, 50), # 09:55
+    (19, 45), # 19:45
+)
 
 
 
@@ -26,7 +26,9 @@ exit_lock = threading.Lock()
 
 def input_exit():
     with exit_lock:
-        input("按回车键退出...")
+        while (in_ := input("按y回车键退出...")) != "y":
+            print("clear")
+
         print("alarm exit")
 
 
@@ -74,8 +76,8 @@ def T_rand_pop(cur, t_rand):
 
 T_rand = rand_time()
 
-#test_t = [(1, 2), (1, 3)]
-#T_rand = test_t
+test_t = [(21, 23), (21, 24)] 
+T_rand = test_t
 
 hour = None
 while True:
@@ -92,6 +94,7 @@ while True:
         print("闹钟提示")
         alarm()
         T_rand = T_rand_pop((cur.hour, cur.minute), T_rand)
+        print("更新后 t_time:", T_rand)
     else:
         time.sleep(40)
 
