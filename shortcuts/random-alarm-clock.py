@@ -76,8 +76,8 @@ def T_rand_pop(cur, t_rand):
 
 T_rand = rand_time()
 
-test_t = [(21, 23), (21, 24)] 
-T_rand = test_t
+#test_t = [(21, 23), (21, 24)] 
+#T_rand = test_t
 
 hour = None
 while True:
