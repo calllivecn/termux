@@ -30,8 +30,8 @@ Connect(){
 	
 	adb connect $machine
 	# fps only support android 10
-	#scrcpy -s $machine --bit-rate 1M --max-size 800 --max-fps 15
-	scrcpy -s $machine --bit-rate 1M --max-size 800
+	#scrcpy -S -s $machine --bit-rate 1M --max-size 800 --max-fps 15
+	scrcpy -S -s $machine --bit-rate 1M --max-size 800
 }
 
 CloseConnect(){
@@ -72,7 +72,7 @@ AutoConnect(){
 		AutoConnectClose &
 
 		adb connect $machine
-		scrcpy -s $machine --bit-rate 1M --max-size 800
+		scrcpy -S -s $machine --bit-rate 1M --max-size 800
 	fi
 
 }

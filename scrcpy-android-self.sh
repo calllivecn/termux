@@ -7,9 +7,9 @@ machive="10.1.2.6:15555"
 
 
 if adb -P 16666 devices |grep "${machive}";then
-        :
+    :
 else
-        adb -P 16666 connect "${machive}"
+    adb -P 16666 connect "${machive}"
 fi
 
 
@@ -21,4 +21,4 @@ export ADB=./adb.sh
 
 trap 'rm -v ./adb.sh' EXIT
 
-scrcpy -s "${machive}" --render-driver=software -b 4M --max-fps 15 --max-size 800
+scrcpy -S -s "${machive}" --render-driver=software -b 4M --max-fps 15 --max-size 800
