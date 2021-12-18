@@ -82,6 +82,7 @@ T_rand = rand_time()
 hour = None
 while True:
     cur = datetime.now()
+
     if hour != cur.hour:
         print((cur.hour, cur.minute))
         hour = cur.hour
