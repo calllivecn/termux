@@ -28,15 +28,12 @@ say(){
 
 confirm(){
 	# 每5分钟，提示一次，提示5次。
-	for i in $(seq 1 4);
+	for i in $(seq 3);
 	do
 		speak "$1"
 		sleep 3
 		#sleep 300
 	done
-
-	speak "$1"
-
 }
 
 
