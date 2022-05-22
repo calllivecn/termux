@@ -1,0 +1,18 @@
+
+install libffi openssl rust
+
+下载源代码
+pip download cryptography
+
+tar -xvf $cryptography
+
+cd cryptography-xxxx/
+
+export CARGO_BUILD_TARGET=aarch64-linux-android
+
+python setup.py build
+
+python setup.py install
+OR
+python setup.py bdist_egg
+
