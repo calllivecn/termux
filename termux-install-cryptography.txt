@@ -1,5 +1,5 @@
 
-install libffi openssl rust
+install libffi openssl rust wheel
 
 下载源代码
 pip download cryptography
@@ -15,4 +15,6 @@ python setup.py build
 python setup.py install
 OR
 python setup.py bdist_egg
+OR # need `pip install wheel`
+python setup.py bdist_wheel
 
