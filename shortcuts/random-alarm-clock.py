@@ -82,6 +82,7 @@ T_rand = test_t
 hour = None
 while True:
     cur = datetime.now()
+    run("date +%F-%R:%S".split())
 
     if hour != cur.hour:
         print((cur.hour, cur.minute))
@@ -98,6 +99,7 @@ while True:
         print("更新后 t_time:", T_rand)
     else:
         time.sleep(40)
+
 
 
 
