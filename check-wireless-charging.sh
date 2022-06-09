@@ -54,9 +54,10 @@ check_battery(){
 	if [ "$battery_status"x = "CHARGING"x ];then
 		# 看看充到多少了
 		B100="$(echo "$S" |jsonfmt.py -d percentage)"
+		echo "$(date +%F-%R) 当前已经充电了: ${B100}%" >> "$LOG"
 	
 		# 是不是在使用无线充电
-		wireless="$( echo "$S" |jsonfmt.py -d plugged)"
+		wireless="$(echo "$S" |jsonfmt.py -d plugged)"
 		if [ "$wireless"x = "PLUGGED_WIRELESS"x ];then
 
 			if [ $B100 -ge 49  ] && [ $B100 -le 51 ];then
