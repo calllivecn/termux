@@ -57,12 +57,27 @@ check_battery(){
 	
 		# 是不是在使用无线充电
 		wireless="$( echo "$S" |jsonfmt.py -d plugged)"
-		if [ "$wireless"x = "PLUGGED_WIRELESS"x ] && [ $B100 -ge "$1" ];then
-			termux-tts-speak "已经无线充电到${B100}%了，可以，也必须要拿开我了。"
-			sleep 5
-			termux-tts-speak "已经无线充电到${B100}%了，可以，也必须要拿开我了。"
-			sleep 5
-			termux-tts-speak "已经无线充电到${B100}%了，可以，也必须要拿开我了。"
+		if [ "$wireless"x = "PLUGGED_WIRELESS"x ];then
+
+			if [ $B100 -ge 49  ] && [ $B100 -le 51 ];then
+				termux-tts-speak "当前手机已经无线充电到50%了。"
+				sleep 5
+				termux-tts-speak "当前手机已经无线充电到50%了。"
+			fi 
+
+			if [ $B100 -ge 79  ] && [ $B100 -le 81 ];then
+				termux-tts-speak "当前手机已经无线充电到80%了。"
+				sleep 5
+				termux-tts-speak "当前手机已经无线充电到80%了。"
+			fi 
+
+			if [ $B100 -ge "$1" ];then
+				termux-tts-speak "已经无线充电到${B100}%了，可以，也必须要拿开我了。"
+				sleep 5
+				termux-tts-speak "已经无线充电到${B100}%了，可以，也必须要拿开我了。"
+				sleep 5
+				termux-tts-speak "已经无线充电到${B100}%了，可以，也必须要拿开我了。"
+			fi
 		fi
 	fi
 }
