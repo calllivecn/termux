@@ -73,6 +73,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias ip='ip -c'
 
 
 # enable programmable completion features (you don't need to enable
