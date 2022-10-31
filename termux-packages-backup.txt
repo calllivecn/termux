@@ -18,3 +18,5 @@ tmux
 zip
 vim
 pv
+python-cryptography
+python-numpy

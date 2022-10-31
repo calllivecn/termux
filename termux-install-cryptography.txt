@@ -1,5 +1,8 @@
 
-install libffi openssl rust wheel
+# 这个不需要了。可以直接安装apt install python-cryptography
+
+apt install libffi openssl rust
+pip install cffi wheel setuptools_rust
 
 下载源代码
 pip download cryptography
