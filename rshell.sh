@@ -1,7 +1,11 @@
+#!/bin/bash
 
+prefix="$PREFIX/../home/bin"
 
 while :
 do
-	python testing/socket-shell/rshell.py client --addr mc.calllive.cc --port 16789 || echo "$(date +%F-%R) -- 失败"
-	sleep 10
+	python $prefix/rshell.py --keyfile .config/ten.json --addr mc.calllive.cc --port 16789 client || echo "$(date +%F-%R) -- 失败"
+	sleep 5
+	python $prefix/rshell.py --keyfile .config/aliyun.json --addr ip.calllive.cc --port 6789 client || echo "$(date +%F-%R) -- 失败"
+	sleep 5
 done

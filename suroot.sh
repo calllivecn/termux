@@ -13,7 +13,9 @@ CWD="/data/data/com.termux/files"
 
 export PATH=$CWD/home/bin:$CWD/usr/bin:$PATH
 
-export HOME=$CWD/home
+#export HOME=$CWD/home
+export HOME=$CWD/root
+cd $HOME
 
 unset CWD
 
