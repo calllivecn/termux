@@ -30,7 +30,7 @@ export ADB="./adb.sh"
 
 trap 'rm -v ./adb.sh' EXIT
 
-scrcpy -S -s "${machive}" --show-touches --render-driver=software -b 2M --max-fps 8 --max-size 800
+scrcpy -S -s "${machive}" --show-touches --power-off-on-close --render-driver=software --max-fps 30 --max-size 800
 #scrcpy -S -s "${machive}" --render-driver=opensles2 -b 4M --max-fps 10 --max-size 800
 
 kill_exit
