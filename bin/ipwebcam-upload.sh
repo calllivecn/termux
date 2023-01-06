@@ -14,12 +14,14 @@
 # 配置 begin
 #############
 
-IPWEBCAM_DIR="$HOME/storage/shared/ipwebcam-videos/rec"
-ALIYUNDRIVE_DIR="/ipwebcam-rec"
+IPWEBCAM_ROOT="$HOME/storage/shared/ipwebcam-videos"
+IPWEBCAM_DIR="$IPWEBCAM_ROOT/rec"
+IPWEBCAM_DIR="$IPWEBCAM_ROOT/modet"
+ALIYUNDRIVE_DIR="/ipwebcam"
 
 # 本地保留多少个
 SAVE_COUNT=12
-UPLOAD_CUR_FILE="${IPWEBCAM_DIR}/.progress"
+UPLOAD_CUR_FILE="${IPWEBCAM_ROOT}/.progress"
 
 ############
 # 配置 end
@@ -82,5 +84,5 @@ while :
 do
 	date +%F_%X
 	main
-	sleep $[10*60]
+	sleep $[1*60]
 done
