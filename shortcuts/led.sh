@@ -1,25 +1,17 @@
 #!/bin/bash
-# date 2019-11-28 00:49:30
+# date 2023-01-09 05:56:39
 # author calllivecn <c-all@qq.com>
-
-. $HOME/.shortcuts/liblock.sh
-
 
 termux-torch on
 
-read -t 5 -p "输入时间：" seconds
+echo -n "输入时间分钟(默认3分钟后关闭)："
+read -t 10 minute
 
-if [ "$seconds"x = x ];then
-	sec=25
-	echo "$sec 秒后关灯。"
-elif [ $seconds -le 30 ];then
-	sec=$[ seconds * 60 ]
-	echo "$seconds 分钟后关灯。"
-elif [ $seconds -gt 30 ];then
-	sec=$seconds
-	echo "$sec 秒后关灯。"
+if [ "$minute"x = x ];then
+	minute=3
 fi
 
-sleep $sec
+echo "$minute 分钟后关灯。"
+sleep $[minute * 60]
 
 termux-torch off

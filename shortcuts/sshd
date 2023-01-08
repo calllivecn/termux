@@ -1,9 +1,0 @@
-#!/bin/bash
-
-. $HOME/.shortcuts/liblock.sh
-
-ip -c a s wlan0
-
-ip -c a s wlan0
-
-sshd -D

@@ -2,8 +2,6 @@
 # date 2019-11-25 21:21:14
 # author calllivecn <c-all@qq.com>
 
-#. $HOME/.shortcuts/liblock.sh
-
 speak(){
 	#termux-tts-speak "$@"
 	tts.sh "$@"
