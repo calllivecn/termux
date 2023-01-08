@@ -1,6 +1,6 @@
 #!/bin/bash
 
-prefix="$PREFIX/../home/bin"
+prefix="$HOME/bin"
 
 while :
 do
