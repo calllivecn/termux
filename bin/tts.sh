@@ -10,7 +10,7 @@
 #
 
 PROGRM="termux-tts-speak"
-FIFO="$HOME/.tmp/fifo-tts"
+FIFO="$HOME/.zx/tmp/fifo-tts"
 
 if [ -p $FIFO ];then
 	:

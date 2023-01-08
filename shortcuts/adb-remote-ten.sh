@@ -2,9 +2,6 @@
 # date 2021-04-23 17:56:20
 # author calllivecn <c-all@qq.com>
 
-termux-wake-lock
-
-
 CONNECT="127.0.0.1:15555"
 
 safe_exit(){
