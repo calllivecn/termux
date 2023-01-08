@@ -37,6 +37,17 @@ confirm(){
 }
 
 
+input_number(){
+	# usage: $0 <title> <default number>
+	local js
+	js=$(termux-dialog text -t "$1" -i $2 -n |jsonfmt.py -d text)
+	if [ "$js"x = x ];then
+		echo $js
+	else
+		echo $2
+	fi
+}
+
 
 煮饭(){
 	sleep $[30*60]
@@ -81,7 +92,8 @@ confirm(){
 洗衣服(){
 	local t
 
-	read -t 10 -p "输入洗衣时间(单位分钟,默认40分钟)：" t
+	#read -t 10 -p "输入洗衣时间(单位分钟,默认40分钟)：" t
+	input_number "输入洗衣时间(单位分钟,默认40分钟)：" 40
 	
 	t=${t:-40}
 
@@ -122,7 +134,8 @@ funcs=(煮饭
 	烧水11分钟
 	测试一下)
 
-main(){
+main_old(){
+	local choice
 	PS3="输入数字选择："
 	select choice in ${funcs[@]};
 	do
@@ -133,5 +146,26 @@ main(){
 	done
 }
 
+
+main(){
+	local choice="" task
+	for task in ${funcs[@]};
+	do
+		if [ "$choice"x = x ];then
+			choice="${task}"
+		else
+			choice="${choice},${task}"
+		fi
+	done
+
+	task=$(termux-dialog radio -t "选择一个任务：" -v "$choice" | jsonfmt.py -d text)
+	if ! [ "$task"x = x ];then
+		echo "开始时间：$(date +%F-%X)"
+		echo "执行任务: $task"
+		speak "执行任务: $task"
+		$task
+	fi
+
+}
 
 main
