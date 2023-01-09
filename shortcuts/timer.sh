@@ -163,6 +163,7 @@ main(){
 		echo "执行任务: $task"
 		speak "执行任务: $task"
 		$task
+		echo "结束时间：$(date +%F-%X)"
 	fi
 
 }
