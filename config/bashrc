@@ -98,8 +98,6 @@ alias ..='cd ..'
 alias j='jobs -l'
 alias d='date +%F-%u-%R'
 alias top='top -d 1'
-alias temp='watch -n 1 sensors'
-alias cdwork='cd ~/work/'
 
 # systemctl alias
 alias scl='sudo systemctl'
@@ -126,41 +124,19 @@ pk(){ ps aux |awk '{if($5 == 0) print $0}'; }
 
 mcd(){ mkdir -p "$1" && cd "$1"; }
 
-cls(){ cd "$1" && ls -CF; }
 
 bak(){ cp "$1"{,.bak}; }
 
 mbak(){ mv "$1"{,.bak}; }
 
-ubak(){ mv "$1" ${1%.bak}; }
-
-hp(){ history |grep "$1"; }
 
 duh(){ du -xmd 1 |sort -k 1 -nr |head -n 20; }
 
-mem(){ free -mhlt; }
 
-listen(){ lsof -P -i -n; }
 
-port(){ ss -tulanp |column -t; }
 
-cpsync(){ cp "$1" "$2" && sync -d "$2"; }
 
-weather(){ wget -qO- http://wttr.in; }
-
-bcl(){
-	if [ -n "$1" ];then
-		echo "$1" |bc -l
-	else
-		echo "Using: bcl <expr>"
-	fi
-}
-
-io(){ iostat -m 1; }
-
-cpufreq(){
-	watch -n 1 'grep "cpu MHz" /proc/cpuinfo'
-}
+# weather(){ wget -qO- http://wttr.in; }
 
 #校验合函数生成
 for hashsum in md5sum sha1sum sha224dum sha256sum sha384sum sha512sum
@@ -175,7 +151,14 @@ unset hashsum
 
 alias tmux="tmux -S $HOME/.tmux.sock"
 
-alias tmuxnew='tmux new -s huawei'
+tmuxnew(){
+	if [ -n $TERMUX_HOSTNAME ];then
+		tmux new -s "$name"
+	else
+		tmux new
+	fi
+
+}
 
 
 xiyou(){
