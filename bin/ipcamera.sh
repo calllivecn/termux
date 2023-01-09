@@ -196,8 +196,8 @@ mergefilename(){
 	ts=$(date +%s -d "${t#Access: }")
 	prefix=$(date +%F-%H-%M-%S -d @${ts})
 
-	t=$(stat "$MERGE_DIR/$new_video" |grep Access |tail -n 1)
-	ts=$(date +%s -d "${t#Access: }")
+	t=$(stat "$MERGE_DIR/$new_video" |grep Modify |tail -n 1)
+	ts=$(date +%s -d "${t#Modify: }")
 	suffix=$(date +%F-%H-%M-%S -d @${ts})
 
 	echo "${prefix}__${suffix}.mkv"
