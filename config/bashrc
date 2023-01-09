@@ -73,7 +73,6 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ip='ip -c'
 
 
 # enable programmable completion features (you don't need to enable
@@ -113,6 +112,7 @@ alias la='ls -AF'
 alias l='ls -CF'
 
 alias grep='grep --color=auto'
+alias ip='ip -c'
 
 #PS1='${?:NO}-\u@\h:\W\$ '
 #PS1='\[\033[01;32m\]${?:-No}-\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
@@ -173,11 +173,10 @@ unset hashsum
 # added by Anaconda3 installer
 #export PATH="/home/zx/anaconda3/bin:$PATH"
 
-export LANG=zh_CN.UTF-8
-
-export sdcard="/storage/emulated/0"
+alias tmux="tmux -S $HOME/.tmux.sock"
 
 alias tmuxnew='tmux new -s huawei'
+
 
 xiyou(){
     set -x
@@ -195,8 +194,3 @@ xiyou(){
     set +x
 }
 
-#########
-
-# ZhangXu EOF Sun Dec 27 00:30:18 CST 2015
-
-#########
