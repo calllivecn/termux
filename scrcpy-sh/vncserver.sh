@@ -22,7 +22,7 @@ LOCK="/tmp/.X1-lock"
 X1="/tmp/.X11-unix/X1"
 
 check(){
-	ss -tnlp |grep -q ':5901' 2>/dev/null
+	ss -tnlp 2>/dev/null |grep -q ':5901'
 }
 
 # 启动vnc
