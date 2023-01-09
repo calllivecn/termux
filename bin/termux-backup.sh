@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+#
+# termux-backup 也是使用 tar 的 shell 脚本， 并且 包含了 $PREFIX/var/lib/proot-distro/ 目录
+#
+
 
 set -e
 
