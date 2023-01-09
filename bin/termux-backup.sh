@@ -18,7 +18,7 @@ FILENAME_SHA256="${FILENAME}.sha256"
 OUTFILE="${HOME}/storage/shared/${FILENAME}"
 OUTFILE_SHA256="${HOME}/storage/shared/${FILENAME_SHA256}"
 
-errror_exit_clear(){
+error_exit_clear(){
 	rm -vf "${OUTFILE}"
 	rm -vf "${OUTFILE_SHA256}"
 }
