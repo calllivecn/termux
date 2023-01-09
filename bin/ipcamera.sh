@@ -138,6 +138,10 @@ time_interval_check(){
 
 	last_video=$(ls -tr $MERGE_DIR| head -n 1)
 
+	if [ "$last_video"x = x ];then
+		return 1
+	fi
+
 	t=$(stat "$MERGE_DIR/$last_video" |grep Access |tail -n 1)
 	t_start=$(date +%s -d "${t#Access: }")
 
@@ -252,7 +256,7 @@ main(){
 			fi
 		fi
 
-		merge_flag=0
+		merge_flag=n
 		echo -n "LOOP: "
 		date +%F-%X
 		sleep $[1*60]
