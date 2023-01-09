@@ -9,7 +9,8 @@ set -e
 
 FIFO=$(mktemp -u)
 
-DATE=$(date +%F_%X)
+# 使用 date +%F_%X 有':' 号，有的安卓文件系统不支持...
+DATE=$(date +%F_%H-%M-%S)
 
 FILENAME="termux-backup-${TERMUX_HOSTNAME}-${DATE}.tza"
 FILENAME_SHA256="${FILENAME}.sha256"
