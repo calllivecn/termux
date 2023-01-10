@@ -41,9 +41,9 @@ input_number(){
 	local js
 	js=$(termux-dialog text -t "$1" -i $2 -n |jsonfmt.py -d text)
 	if [ "$js"x = x ];then
-		echo $js
-	else
 		echo $2
+	else
+		echo $js
 	fi
 }
 
@@ -163,6 +163,7 @@ main(){
 		echo "执行任务: $task"
 		speak "执行任务: $task"
 		$task
+		echo "结束时间：$(date +%F-%X)"
 	fi
 
 }
