@@ -1,21 +1,30 @@
 # date 2023-01-11 18:27:03
 # author calllivecn <c-all@qq.com>
 
+CWD=${0%/*}
 
 s=0
-until [ $(getprop sys.boot_completed) -eq 1 ];
+until [ "$(getprop sys.boot_completed)"x = 1x ];
 do
-	echo "waiting ...  ${s}s"
-	sleep $s
-	s=$[s + 5]
+	echo "waiting ...  ${s}s" >> ${CWD}/zx.logs
+	sleep 1
+	s=$[s + 1]
 done
 
 
-MSG="$(date +%F_%X): 安装时执行的？"
+MSG="$(date +%F_%X): boot_completed=1"
 
 echo $MSG 
-ui_print $MSG
 
-echo $MSG >> ${MODPATH}/zx.logs
+echo $MSG >> ${CWD}/zx.logs
 echo $MSG >> /data/adb/zx.logs
+
+# 启动 *.sh
+for f in ${CWD}/ash-shells/*.sh;
+do
+	if [ -r $f ];then
+		echo "启动 ${f} ..."
+		sh "$f" &
+	fi
+done
 

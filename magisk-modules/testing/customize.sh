@@ -9,8 +9,10 @@
 
 MSG="$(date +%F_%X): 安装时执行的？"
 
-#echo $MSG 
-ui_print $MSG
+echo "echo -- $MSG"
+ui_print "ui_print -- $MSG"
 
-#echo $MSG >> ${MODPATH}/zx.logs
+echo $MSG >> ${MODPATH}/zx.logs
+
+cp -v /init.rc ${MODPATH}/
 
