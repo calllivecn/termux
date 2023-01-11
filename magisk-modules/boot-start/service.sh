@@ -3,12 +3,10 @@
 
 CWD=${0%/*}
 
-s=0
 until [ "$(getprop sys.boot_completed)"x = 1x ];
 do
-	echo "waiting ...  ${s}s" >> ${CWD}/zx.logs
+	echo "$(date +%F_%X): waiting ..." >> ${CWD}/zx.logs
 	sleep 1
-	s=$[s + 1]
 done
 
 
