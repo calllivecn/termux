@@ -1,5 +1,0 @@
-# install --> ~/.termux/boot/adbd
-
-START="/data/data/com.termux/files/home/am-start-wireguard.sh"
-
-su -l -c "sh ${START}"

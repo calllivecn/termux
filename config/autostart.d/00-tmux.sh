@@ -9,7 +9,7 @@ if [ "$UID"x != "0"x ];then
     else
         echo "tmux session: $SESSION 启动完成"
         #tmux -S $HOME/.tmux.sock new -s $SESSION -d bash
-        tmux -S $HOME/.tmux.sock new -s $SESSION -d proot-distro login ubuntu
+        tmux -S $HOME/.tmux.sock new -s $SESSION -d "proot-distro login ubuntu"
     fi
 fi
 unset SESSION
