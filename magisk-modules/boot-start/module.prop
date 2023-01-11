@@ -1,0 +1,6 @@
+id=boot-start
+name=boot auto start a shell
+version=0.1
+versionCode=1
+author=calllivecn
+description=boot auto start a shell
