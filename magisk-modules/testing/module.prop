@@ -1,6 +1,6 @@
 id=testing
-name=test magisk module
+name=测试 magisk module
 version=v0.1
 versionCode=1
 author=calllivecn
-description=test magisk module
+description=学习和实验 magisk module
