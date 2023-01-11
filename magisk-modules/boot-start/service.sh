@@ -18,7 +18,7 @@ echo $MSG >> ${CWD}/zx.logs
 echo $MSG >> /data/adb/zx.logs
 
 # 启动 *.sh
-for f in ${CWD}/ash-shells/*.sh;
+for f in ${CWD}/shells/*.sh;
 do
 	if [ -r $f ];then
 		echo "启动 ${f} ..."
