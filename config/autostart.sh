@@ -16,17 +16,25 @@ auto_start(){
     for i in $HOME/.autostart.d/*.sh;
     do
         if [ -r $i ];then
-            if tmux -S $TMUX_SOCK new-window -t "$SESSION" -d "bash $i" ;then
-                 log "$i boot done"
+            if tmux -S $TMUX_SOCK new-window -t "$SESSION" -n "${i##*/}" -d "bash $i" ;then
+                 log "boot done --> $i"
             else
-                 log "$i boot fail"
+                 log "boot fail --> $i"
             fi
         fi
     done
 }
 
-if [ "$UID"x != "0"x ];then
+check_tmux_daemon(){
     if tmux -S $TMUX_SOCK list-session -F "#{session_name}" 2>/dev/null |grep -q "$SESSION" ;then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if [ "$UID"x != "0"x ];then
+    if check_tmux_daemon;then
         echo "tmux session: $SESSION alread start"
     else
         echo "tmux session: $SESSION start done"
