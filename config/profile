@@ -9,20 +9,14 @@ fi
 if [ -r $PREFIX/etc/hostname ];then
 	TERMUX_HOSTNAME=$(cat $PREFIX/etc/hostname)
 else
-	TERMUX_HOSTNAME="termux-hostname-not-set"
+	TERMUX_HOSTNAME="termux-autoboot"
 fi
 
 export TERMUX_HOSTNAME
 
-# auto start
-for i in $HOME/.autostart.d/*.sh;
-do
-	if [ -r $i ];then
-		bash $i
-	fi
-done
-
-unset i
+# auto start tmux daemon
+if [ -r $HOME/.autostart.sh ];then
+	bash $HOME/.autostart.sh
+fi
 #########
-
-
+#
