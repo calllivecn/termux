@@ -16,6 +16,15 @@ if [ ! -d $HOME ];then
 	mkdir -p $HOME
 fi
 
+# 之前启动的有这报错。。。 ttyd: not found
+# wait PATH ???
+if type ttyd;then
+    :
+else
+    sleep 1
+fi
+
+
 ttyd -p 8886 \
 	-c 'zx:huawei.linux' \
 	--ssl --ssl-cert server.crt --ssl-key server.key \
