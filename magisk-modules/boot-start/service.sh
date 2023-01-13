@@ -2,29 +2,31 @@
 # author calllivecn <c-all@qq.com>
 
 CWD=${0%/*}
+LOGS=${CWD}/logs
+BOOT_LOG=${LOGS}/boot.log
 
-LOG=${CWD}/zx.logs
+if [ ! -d $LOGS ];then
+    mkdir -p $LOGS
+fi
 
 until [ "$(getprop sys.boot_completed)"x = 1x ];
 do
-	echo "$(date +%F_%X): waiting ..." >> "$LOG"
+	echo "$(date +%F_%X): waiting ..." >> "$BOOT_LOG"
 	sleep 1
 done
 
-
 MSG="$(date +%F_%X): boot_completed=1"
 
-echo $MSG 
-
-echo $MSG >> "$LOG"
-echo $MSG >> /data/adb/zx.logs
+echo $MSG >> "$BOOT_LOG"
 
 # 启动 *.sh
 for f in ${CWD}/shells/*.sh;
 do
 	if [ -r $f ];then
-		echo "启动 ${f} ..." >> "$LOG"
-		sh "$f" &
+        shell=${f##*/}
+        prefix_shell=${shell%.sh}
+		echo "启动 ${shell} ..." >> "$BOOT_LOG"
+		sh "$f" >> "${CWD}/logs/${prefix_shell}.log" 2>&1 &
 	fi
 done
 
