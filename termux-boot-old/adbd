@@ -1,8 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-
-BOOT_LOG="$HOME/.zx/logs/boot.logs"
-echo -n "adbd 从 termux:boot 启动时间: " >> $BOOT_LOG
-date +%F_%X >> $BOOT_LOG
-
-#su -l -c "setprop service.adb.tcp.port 15555;/data/data/adbd"
-su -l -c "setprop service.adb.tcp.port 15555;adbd"

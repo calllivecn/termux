@@ -1,0 +1,14 @@
+#!/data/data/com.termux/files/usr/bin/sh
+# date 2023-01-09 10:44:58
+# author calllivecn <c-all@qq.com>
+
+
+# termux:boot 只使用一个脚本，用来启动 ~/.autostart.sh
+
+if [ -d $HOME/bin ];then
+	export PATH=$HOME/bin:$PATH
+fi
+
+if [ -f $HOME/.autostart.sh ];then
+	bash $HOME/.autostart.sh
+fi
