@@ -24,8 +24,8 @@ else
     sleep 1
 fi
 
-
-ttyd -p 8886 \
+# v1.7.3 支持ipv6
+ttyd -6 -p 8886 \
 	-c 'zx:huawei.linux' \
 	--ssl --ssl-cert server.crt --ssl-key server.key \
 	--cwd $HOME \
