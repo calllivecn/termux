@@ -9,7 +9,26 @@ fi
 #xrdb $HOME/.Xresources
 #startxfce4 &
 
+########################################
 # init 2 需要 把 xfce4-session 插入/etc/X11/Xsession 的开头
+# 或者 openbox-session 
+# 放开头如下：
+#
+# #!/bin/sh
+# #
+# # /etc/X11/Xsession
+# #
+# # global Xsession file -- used by display managers and xinit (startx)
+#
+# # $Id: Xsession 967 2005-12-27 07:20:55Z dnusinow $
+#
+# openbox-session &
+#
+# set -e
+#
+# PROGNAME=Xsession
+#
+######################################
 
 IP="10.1.2.6"
 

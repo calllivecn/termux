@@ -17,7 +17,7 @@
 # 配置 begin
 #############
 
-IPWEBCAM_ROOT="$HOME/storage/shared/ipwebcam-videos"
+IPWEBCAM_ROOT="$HOME/storage/shared/ipcamera"
 
 cd $IPWEBCAM_ROOT
 
