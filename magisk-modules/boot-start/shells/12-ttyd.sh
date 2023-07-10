@@ -8,13 +8,29 @@ cd ${CWD}
 echo ${CWD}
 
 # HOME 需要 绝对路径
-export HOME="$(readlink -f ${CWD}/../ttyd)"
+
+TERMUX_HOME="/data/data/com.termux/files"
+
+if [ -d "$TERMUX_HOME" ];then
+    if [ -d "${TERMUX_HOME}/root" ];then
+        :
+    else
+        mkdir -vp "${TERMUX_HOME}/root"
+    fi
+
+    export HOME="${TERMUX_HOME}/root"
+
+else
+    export HOME="$(readlink -f ${CWD}/../ttyd)"
+    
+    
+    if [ ! -d $HOME ];then
+    	mkdir -p $HOME
+    fi
+
+fi
 
 echo "define HOME direcory: $HOME"
-
-if [ ! -d $HOME ];then
-	mkdir -p $HOME
-fi
 
 # 之前启动的有这报错。。。 ttyd: not found
 # wait PATH ???
@@ -24,7 +40,7 @@ else
     sleep 1
 fi
 
-# v1.7.3 支持ipv6
+
 ttyd -6 -p 8886 \
 	-c 'zx:huawei.linux' \
 	--ssl --ssl-cert server.crt --ssl-key server.key \
