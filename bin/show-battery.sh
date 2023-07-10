@@ -3,7 +3,7 @@
 # author calllivecn <c-all@qq.com>
 
 
-# 需要 root 权限
+# 需要 root or shell 权限
 
 while :
 do
