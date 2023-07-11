@@ -9,6 +9,6 @@ if [ -d $HOME/bin ];then
 	export PATH=$HOME/bin:$PATH
 fi
 
-if [ -f $HOME/.autostart.sh ];then
+if [ -r $HOME/.autostart.sh ];then
 	bash $HOME/.autostart.sh
 fi
