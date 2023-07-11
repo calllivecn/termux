@@ -12,7 +12,7 @@ fi
 until [ "$(getprop sys.boot_completed)"x = 1x ];
 do
 	echo "$(date +%F_%X): waiting ..." >> "$BOOT_LOG"
-	sleep 1
+	sleep 3
 done
 
 MSG="$(date +%F_%X): boot_completed=1"
