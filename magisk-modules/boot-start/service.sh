@@ -40,7 +40,7 @@ do
         shell=${f##*/}
         prefix_shell=${shell%.sh}
 		log "启动 ${shell} ..."
-		sh "$f" >> "${CWD}/logs/${prefix_shell}.log" 2>&1 &
+		sh "$f" >> "${LOGS}/${prefix_shell}.log" 2>&1 &
 	fi
 done
 
