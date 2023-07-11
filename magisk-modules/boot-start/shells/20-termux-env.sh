@@ -32,9 +32,16 @@ fi
 
 HOME="$TERMUX_HOME/root"
 
+
 SESSION="daemon"
 TMUX_SOCK="$HOME/.tmux.sock"
 TMUX_BOOT_LOG="$HOME/.zx/logs/boot.logs"
+
+if [ -d "$HOME/.zx/logs" ];then
+    :
+else
+    mkdir -vp "$HOME/.zx/logs"
+fi
 
 log(){
     echo "$(date +%F_%X): $@" >> $TMUX_BOOT_LOG
