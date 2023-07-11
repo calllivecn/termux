@@ -155,6 +155,11 @@ def main():
                 else:
                     logger.info("关闭失败")
 
+        elif level <= 30:
+            if not charging:
+                # 关机
+                subprocess.run(["reboot", "-p"])
+                sys.exit(0)
 
         time.sleep(60)
 
