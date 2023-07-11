@@ -9,7 +9,8 @@ LOG_DIR=$(cd ${CWD}/.. ;pwd)
 LOG_DIR=$(cd ${LOG_DIR}/.. ;pwd)
 
 LOGS=${LOG_DIR}/logs
-BOOT_LOG=${LOGS}/boot.log
+
+export BOOT_LOG=${LOGS}/boot.log
 
 if [ ! -d $LOGS ];then
     mkdir -p $LOGS
