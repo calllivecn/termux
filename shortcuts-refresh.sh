@@ -4,7 +4,7 @@
 
 # 使用这个工具生成 或 刷新 .shortcuts脚本
 # 
-# 这样没用， shortcuts 使用的是用 sh 极简shell执行的很功能没有
+# 这样没用， shortcuts 使用的是用 sh 极简shell执行的很多功能没有
 # .shortcuts init 
 #
 # 如果是 py 脚本安装到shortcuts 
@@ -21,7 +21,7 @@ shell_head(){
 # 清空 原文件
 cat >"${SHORT}/${1}"<<EOF
 
-# 如果需要长时间，termux-wake-lock是需要的
+# 如果需要长时间运行，termux-wake-lock是需要的
 termux-wake-lock
 
 # refresh date: $(date "+%F %X")
