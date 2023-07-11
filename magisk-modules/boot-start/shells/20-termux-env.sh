@@ -3,9 +3,13 @@
 CWD=$(cd $(dirname "${0}");pwd)
 cd ${CWD}
 
+LOG_DIR=$(cd ${CWD}/.. ;pwd)
+LOG_DIR=$(cd ${LOG_DIR}/.. ;pwd)
+
+# BOOT_LOG_DIR 来自父脚本 service.sh
 log(){
     echo "$(date +%F_%X): $@"
-    echo "$(date +%F_%X): $@" >> $TMUX_BOOT_LOG >/dev/null 2>&1
+    echo "$(date +%F_%X): $@" >> $BOOT_LOG_DIR
 }
 
 notexists_make(){
@@ -55,15 +59,12 @@ else
     exit 1
 fi
 
-HOME="$TERMUX_HOME/root"
+export HOME="$TERMUX_HOME/root"
 notexists_make "$HOME"
 
 SESSION="daemon4root"
 
 TMUX_SOCK="$HOME/.tmux.sock"
-
-TMUX_BOOT_LOG="$HOME/.zx/logs/boot4root.logs"
-notexists_make "$HOME/.zx/logs"
 
 
 # 查看有没有需要引导的 *.sh
