@@ -6,10 +6,11 @@ cd ${CWD}
 LOG_DIR=$(cd ${CWD}/.. ;pwd)
 LOG_DIR=$(cd ${LOG_DIR}/.. ;pwd)
 
-# BOOT_LOG_DIR 来自父脚本 service.sh
+# ~~BOOT_LOG_DIR 来自父脚本 service.sh~~ 
+# 来不了，父目录的export 
 log(){
     echo "$(date +%F_%X): $@"
-    echo "$(date +%F_%X): $@" >> $BOOT_LOG_DIR
+    #echo "$(date +%F_%X): $@" >> $BOOT_LOG_DIR
 }
 
 notexists_make(){
