@@ -3,3 +3,5 @@
 *.log
 *.logs
 *.pid
+
+__pycache__/

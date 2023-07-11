@@ -7,11 +7,26 @@ import os
 import sys
 import time
 import subprocess
+import logging
 
 
 import miio
 from miio.chuangmi_plug  import ChuangmiPlug
 from miio.exceptions import DeviceException
+
+def getlogger(level=logging.INFO):
+    fmt = logging.Formatter("%(asctime)s %(levelname)s line:%(lineno)d %(message)s", datefmt="%Y-%m-%d-%H:%M:%S")
+
+    stream = logging.StreamHandler(sys.stdout)
+    stream.setFormatter(fmt)
+
+    logger = logging.getLogger("battery-miio")
+    logger.setLevel(level)
+    logger.addHandler(stream)
+    return logger
+
+
+logger = getlogger()
 
 
 
@@ -25,7 +40,7 @@ class Plugin:
 
     def info(self):
         s = miio.device.Device(ip=self.ip, token=self.token)
-        print(s.info())
+        logger.info(s.info())
 
 
     def status(self):
@@ -36,7 +51,7 @@ class Plugin:
         try:
             status = self.device.status()
         except DeviceException as e:
-            print("查询设备状态异常: {e=}")
+            logger.info(f"查询设备状态异常: {e=}")
             return 2
 
         if status.is_on:
@@ -87,13 +102,13 @@ def getbattery():
     r = r.stdout.decode()
     for t in [ t.strip() for t in r.splitlines() ]:
         if t.startswith("level:"):
-            level = int(t.split(":").strip())
+            level = int(t.split(":")[1].strip())
         
         if t.startswith("temperature:"):
-            temp = int(t.split(":").strip()) /10
+            temp = int(t.split(":")[1].strip()) /10
 
         if t.startswith("status:"):
-            s = t.split(":").strip()
+            s = t.split(":")[1].strip()
 
     
     if s == "2":
@@ -111,9 +126,10 @@ def main():
         IP = os.environ["MIROBO_IP"]
         TOKEN = os.environ["MIROBO_TOKEN"]
     except Exception:
-        print("设置环境变量: MIROBO_IP, MIROBO_TOKEN")
+        logger.warning("设置环境变量: MIROBO_IP, MIROBO_TOKEN")
         sys.exit(1)
 
+    logger.info("start")
 
     dev = Plugin(IP, TOKEN)
 
@@ -123,12 +139,22 @@ def main():
         level, temp, charging = getbattery()
 
         if level <= 70:
-            if charging is False:
-                dev.on()
+            if not charging:
+                logger.info("打开插座..")
+                if dev.on():
+                    logger.info("打开成功")
+                else:
+                    logger.info("打开失败")
+
 
         elif level >= 80:
             if charging:
-                dev.off()
+                logger.info("关闭插座..")
+                if dev.off():
+                    logger.info("关闭成功")
+                else:
+                    logger.info("关闭失败")
+
 
         time.sleep(60)
 
