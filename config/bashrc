@@ -96,7 +96,7 @@ fi
 alias tmux="tmux -S $HOME/.tmux.sock"
 
 tmuxnew(){
-	if [ -n $TERMUX_HOSTNAME ];then
+	if [ "$TERMUX_HOSTNAME"x != x ];then
 		tmux new -s "$TERMUX_HOSTNAME"
 	else
 		tmux new -s "name"
