@@ -161,7 +161,7 @@ def main():
                 subprocess.run(["reboot", "-p"])
                 sys.exit(0)
 
-        time.sleep(60)
+        time.sleep(300)
 
 
 
