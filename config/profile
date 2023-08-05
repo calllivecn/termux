@@ -2,7 +2,7 @@
 export LANG=zh_CN.UTF-8
 
 if [ -d $HOME/bin ];then
-	export PATH=$PATH:$HOME/bin
+	export PATH=$HOME/bin:$PATH
 fi
 
 # 设置termux hostname
