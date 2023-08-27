@@ -1,0 +1,20 @@
+# termux 里要使用 root 启动 sshd 需要把所有用户的authorized_keys 统一到一起.
+
+
+$prefix/etc/ssh/auth/
+drw------- 2 root    root    3.5K 2023-08-28 06:25:40.280000000 +0800 auth/ 
+
+
+- 为root 启动sshd 修改 sshd_config 配置
+
+```
+PrintMotd no
+#ListenAddress 10.1.2.6
+PasswordAuthentication no
+Subsystem sftp /data/data/com.termux/files/usr/libexec/sftp-server
+
+StrictModes no
+
+AuthorizedKeysFile /data/data/com.termux/files/usr/etc/ssh/auth/authorized_keys_all-user
+```
+
