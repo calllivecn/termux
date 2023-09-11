@@ -111,9 +111,9 @@ def getbattery():
             s = t.split(":")[1].strip()
 
     
-    if s == "2":
+    if s == "2" or s == "5":
         charging = True
-    elif s == "3" or s == "4" or s == "5":
+    elif s == "3" or s == "4":
         charging = False
 
 
@@ -137,6 +137,7 @@ def main():
 
     while True:
         level, temp, charging = getbattery()
+        logger.info(f"{level=} {temp=} {charging=}")
 
         if level <= 70:
             if not charging:
