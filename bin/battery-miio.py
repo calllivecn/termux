@@ -136,31 +136,34 @@ def main():
     # 当前状态和 last状态
 
     while True:
-        level, temp, charging = getbattery()
-        logger.info(f"{level=} {temp=} {charging=}")
+        try:
+            level, temp, charging = getbattery()
+            logger.info(f"{level=} {temp=} {charging=}")
 
-        if level <= 70:
-            if not charging:
-                logger.info("打开插座..")
-                if dev.on():
-                    logger.info("打开成功")
-                else:
-                    logger.info("打开失败")
+            if level <= 70:
+                if not charging:
+                    logger.info("打开插座..")
+                    if dev.on():
+                        logger.info("打开成功")
+                    else:
+                        logger.info("打开失败")
 
 
-        elif level >= 80:
-            if charging:
-                logger.info("关闭插座..")
-                if dev.off():
-                    logger.info("关闭成功")
-                else:
-                    logger.info("关闭失败")
+            elif level >= 80:
+                if charging:
+                    logger.info("关闭插座..")
+                    if dev.off():
+                        logger.info("关闭成功")
+                    else:
+                        logger.info("关闭失败")
 
-        elif level <= 30:
-            if not charging:
-                # 关机
-                subprocess.run(["reboot", "-p"])
-                sys.exit(0)
+            elif level <= 30:
+                if not charging:
+                    # 关机
+                    subprocess.run(["reboot", "-p"])
+                    sys.exit(0)
+        except Exception as e:
+            logger.waring(f"异常: {e}")
 
         time.sleep(300)
 
