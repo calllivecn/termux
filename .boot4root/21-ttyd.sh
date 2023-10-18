@@ -21,8 +21,8 @@ else
 fi
 
 
-# 配合 nginx 使用
-ttyd -i 127.0.0.1 -p 57681 \
+# 配合 nginx 使用, v1.7.4 开始web终端默认是只读，添加上-w才可读写。
+ttyd -i 127.0.0.1 -p 57681 -W \
 	--cwd $HOME \
 	bash --login
 	#bash --init-file bashrc
