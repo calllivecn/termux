@@ -32,4 +32,4 @@ termux-job-scheduler \
 	--period-ms 900000 \
 	--battery-not-low false \
 	--persisted true \
-	--script $job_abspath
+	--script "$job_abspath"
