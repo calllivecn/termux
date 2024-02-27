@@ -33,10 +33,16 @@ export ADB="$adb_tmp"
 
 trap "rm -v ${adb_tmp}" EXIT
 
+# -S, --turn-screen-off: 连接后关闭屏幕
+# -s: 在有多个adb deivces 时指定要连接的设备
+# --power-off-on-close: 连接断开后关闭屏幕
+# --show-touches: 显示触摸位置
+# --no-cleanup: 告诉 scrcpy 不要“清理”，包括恢复电源模式。
+
 #scrcpy -S -s "${machive}" --power-off-on-close --show-touches --render-driver=software -b 2M --max-fps 8 --max-size 800
 # v2.1
-scrcpy -S -s "${machive}" --power-off-on-close --show-touches --no-audio --render-driver=software --max-fps 30 --max-size 800
+scrcpy -S -s "${machive}" --power-off-on-close --show-touches --no-cleanup --no-audio --render-driver=software --max-fps 30 --max-size 800
 
 kill_exit
 
-date +%F-%R
+date +%F_%T
