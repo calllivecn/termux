@@ -82,7 +82,7 @@ main(){
 
 while :
 do
-	date +%F_%X
+	date +%F_%T
 	main
 	sleep $[1*60]
 done
