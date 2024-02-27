@@ -1,0 +1,57 @@
+#!/bin/bash
+# date 2024-02-27 16:37:39
+# author calllivecn <c-all@qq.com>
+
+
+# 使用 adb shell pm disable-user <packagname>  禁用系统app
+# 使用 adb shell pm enable <packagname> 启用系统app
+
+# 好像禁用了不应该禁用的app 会导致系统重启？。。
+
+
+# 软件更新：别偷偷更新系统
+com.huawei.android.hwouc
+
+# 华为视频：垃圾（鸿蒙系统建议留着）
+com.huawei.himovie
+
+# 音乐：垃圾
+com.android.mediacenter
+
+# 浏览器：垃圾
+com.android.browser
+
+# 华为钱包：做地铁公交可以付款，但我没用
+com.huawei.wallet
+
+# 服务：废话一堆的文字，教你怎么用手机
+com.huawei.phoneservice
+
+# 智能检测：说是可以检修手机，放屁
+com.huawei.hwdetectrepair
+
+# 查找我的手机：丢了咋可能找回来
+com.huawei.android.findmyphone
+
+# 智慧搜索：桌面下拉的搜索功能，烦死了
+com.huawei.search
+
+
+#语音助手：底部上滑的 ai 语音助手
+com.huawei.vassistant
+
+# 智能助手（智慧助手）：最左边的负一屏，我用不到
+com.huawei.intelligent
+
+# 用户体验改进计划：别偷我隐私
+com.huawei.bd
+
+# 华为应用市场：模棱两可，随便吧
+com.huawei.appmarket
+
+# 百度输入法华为版：垃圾
+com.baidu.input_huawei
+
+# 主题：注意 emui9.1 上发现删除后闹钟无法自定义铃声。鸿蒙系统删除无影响。
+com.huawei.android.thememanager
+
