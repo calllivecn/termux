@@ -9,6 +9,9 @@
 #am start -n net.christianbeier.droidvnc_ng/.MainActivity
 am start -n com.wireguard.android/.activity.MainActivity
 
+# 停止Activity...
+#am force-stop "$packagename"
+
 
 # 查看包的启动 MainActivity
 # 1. 切换到root。
