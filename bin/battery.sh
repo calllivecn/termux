@@ -15,7 +15,7 @@ i = $1 - $2
 if i > 5:
     print(0)
 else:
-    print(round(i, 3))
+    print(round(5 - i, 3))
 EOF
 }
 
