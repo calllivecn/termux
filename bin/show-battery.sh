@@ -27,7 +27,7 @@
 while :
 do
     echo "==================="
-    date "+%F_%X"
+    date "+%F_%T"
     dumpsys battery
     sleep 5
 done

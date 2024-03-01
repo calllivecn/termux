@@ -5,7 +5,9 @@
 
 import os
 import sys
+import pwd
 import time
+import json
 import subprocess
 import logging
 
@@ -86,7 +88,8 @@ class Plugin:
 
 # 查看电池电量和温度, 是否在充电
 
-def getbattery():
+# 需要是root用户 or shell(adb) 用户才行
+def getbattery1():
     """
     return: (level, temp, charging)
     charging: --> bool
@@ -116,8 +119,43 @@ def getbattery():
     elif s == "3" or s == "4":
         charging = False
 
+    else:
+        # 如果是未知状态，就当在充电。
+        charging = True
+
 
     return level, temp, charging
+
+def getbattery2():
+    """
+    return: (level, temp, charging)
+    """
+    r = subprocess.run(["termux-battery-status"], stdout=subprocess.PIPE)
+    r.check_returncode()
+    
+    js = json.loads(r.stdout)
+
+    level = js["percentage"]
+    temp = js["temperature"]
+
+    if js["status"] == "DISCHARGING":
+        charging = False
+    else:
+        charging = True
+
+    return level, temp, charging
+
+
+def getbattery():
+    """
+    return: (level, temp, charging)
+    """
+
+    username = pwd.getpwuid(os.getuid()).pw_name
+    if username == "root":
+        return getbattery1()
+    else:
+        return getbattery2()
 
 
 def main():
@@ -159,11 +197,16 @@ def main():
 
             elif level <= 30:
                 if not charging:
-                    # 关机
-                    subprocess.run(["reboot", "-p"])
-                    sys.exit(0)
+                    # 关机, 需要有权限才行。
+                    username = pwd.getpwuid(os.getuid()).pw_name
+                    if username == "root":
+                        subprocess.run(["reboot", "-p"])
+                        sys.exit(0)
+                    else:
+                        logger.waning(f"电量不足30%, 需要关机，权限不足...")
+
         except Exception as e:
-            logger.waring(f"异常: {e}")
+            logger.warning(f"异常: {e}")
 
         time.sleep(300)
 
