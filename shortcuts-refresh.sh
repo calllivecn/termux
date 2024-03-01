@@ -7,6 +7,9 @@
 # 这样没用， shortcuts 使用的是用 sh 极简shell执行的很多功能没有
 # .shortcuts init 
 #
+# 这样在miui实测下没用，sh shell 不认后添加的路径。。。$HOME/bin]
+# 目前看好像是只能使用 /data/data/com.termux/files/usr/bin 下的执行命令
+#
 # 如果是 py 脚本安装到shortcuts 
 # 1. 需要先把对应的 *.py 放到$PATH
 # 2. 在echo 'type -p <name.py>' > termux/shortcuts/<short-name.py>
