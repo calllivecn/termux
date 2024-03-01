@@ -15,6 +15,10 @@ say_date(){
 	speak "$(date +%F)"
 }
 
+jsonfmt(){
+	python $HOME/bin/jsonfmt.py "$@"
+}
+
 say(){
 
 	speak "$1"
@@ -39,7 +43,7 @@ confirm(){
 input_number(){
 	# usage: $0 <title> <default number>
 	local js
-	js=$(termux-dialog text -t "$1" -i $2 -n |jsonfmt.py -d text)
+	js=$(termux-dialog text -t "$1" -i $2 -n |jsonfmt -d text)
 	if [ "$js"x = x ];then
 		echo $2
 	else
@@ -157,7 +161,7 @@ main(){
 		fi
 	done
 
-	task=$(termux-dialog radio -t "选择一个任务：" -v "$choice" | jsonfmt.py -d text)
+	task=$(termux-dialog radio -t "选择一个任务：" -v "$choice" | jsonfmt -d text)
 	if ! [ "$task"x = x ];then
 		echo "开始时间：$(date +%F-%X)"
 		echo "执行任务: $task"
