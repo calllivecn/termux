@@ -6,7 +6,11 @@
 
 # post-fs-data 里需要使用resetprop -n 
 
+# 这是android9 以及之前版本的做法？
 resetprop -n sys.boot_from_charger_mode 1
+
+# android10 以上的是 settings put global key value ? 目前还少实操测试。
+#settings put global sys.boot_from_charger_mode 1
 
 
 # on charger
@@ -16,3 +20,4 @@ resetprop -n sys.boot_from_charger_mode 1
 #   setprop sys.powerctl reboot #添加进这段
 
 #resetprop -n sys.powerctl reboot
+
