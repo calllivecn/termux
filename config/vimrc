@@ -6,6 +6,8 @@ set number
 "set expandtab
 set softtabstop=4
 
+" 禁用鼠标
+set mouse=
 
 "source ~/.vim/test.vim
 
