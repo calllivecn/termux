@@ -91,6 +91,8 @@ unset hashsum
 # 在 termux 使用 root 启动 sshd 时区分一下。
 if [  "$UID"x = "0"x ];then
 	export HOME=/data/data/com.termux/files/root
+else
+	export HOME=/data/data/com.termux/files/home
 fi
 
 alias tmux="tmux -S $HOME/.tmux.sock"
