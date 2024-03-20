@@ -21,8 +21,8 @@ CHARGER_ON="echo 1 > /sys/class/hw_power/charger/charge_data/enable_charger"
 #在让电池保持在指定范围里40%~60%
 BATTERY_KEEP_RANGE=(55 60)
 
-#充电状态的字段名一般是(只使用了这两个)："Not charging" "charging"
-STATUS_NAME=("Not charging" "charging")
+#充电状态的字段名一般是(只使用了这两个, 每个不同的设备都需要具体查看这个值)："Not charging" "Charging"
+STATUS_NAME=("Not charging" "Charging")
 
 # 电流乘放系数
 CURRENT_FACTOR=1000
