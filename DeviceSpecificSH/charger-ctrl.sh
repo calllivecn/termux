@@ -105,10 +105,6 @@ battery_keep_monitor(){
                 show
                 log "开始充电..."
                 eval "$CHARGER_ON"
-            elif [ "$CAPACITY" -ge "${BATTERY_KEEP_RANGE[1]}" ];then
-                show
-                log "关闭充电..."
-                eval "$CHARGER_OFF"
             fi
 
         # 是在充电状态时
