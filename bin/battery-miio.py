@@ -96,7 +96,7 @@ def getbattery1():
     1 或 unknown：未知状态。
     2 或 charging：充电中。
     3 或 discharging：未充电。
-    4 或 not charging：未充电。
+    4 或 not charging：有电源连接，未充电。
     5 或 full：电池已充满。
     """
     r = subprocess.run(["dumpsys", "battery"], stdout=subprocess.PIPE)
