@@ -123,8 +123,13 @@ battery_keep_monitor(){
 main(){
     case "${1:-battery}" in 
         --show)
-            get_info
-            show
+            while :;
+            do
+                echo -en "\033c"
+                get_info
+                show
+                sleep 1
+            done
             ;;
         *)
             battery_keep_monitor
