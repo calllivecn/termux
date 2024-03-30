@@ -160,6 +160,10 @@ def getbattery():
 
 def main():
 
+    BATTERY_MIN = int(os.environ.get("BATTERY_MIX", "50"))
+    BATTERY_MAX = int(os.environ.get("BATTERY_MAX", "60"))
+    BATTERY_SHUTDOWN = int(os.environ.get("BATTERY_SHUTDOWN", "20"))
+
     try:
         IP = os.environ["MIROBO_IP"]
         TOKEN = os.environ["MIROBO_TOKEN"]
@@ -178,7 +182,7 @@ def main():
             level, temp, charging = getbattery()
             logger.info(f"{level=} {temp=} {charging=}")
 
-            if level <= 70:
+            if level <= BATTERY_MIN:
                 if not charging:
                     logger.info("打开插座..")
                     if dev.on():
@@ -187,7 +191,7 @@ def main():
                         logger.info("打开失败")
 
 
-            elif level >= 80:
+            elif level >= BATTERY_MAX:
                 if charging:
                     logger.info("关闭插座..")
                     if dev.off():
@@ -195,7 +199,7 @@ def main():
                     else:
                         logger.info("关闭失败")
 
-            elif level <= 30:
+            elif level <= BATTERY_SHUTDOWN:
                 if not charging:
                     # 关机, 需要有权限才行。
                     username = pwd.getpwuid(os.getuid()).pw_name
