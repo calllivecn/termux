@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2019-11-28 02:35:06
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 PROGRAM_DIR="$(dirname $(pwd)/${0})"
 

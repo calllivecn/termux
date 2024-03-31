@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2021-06-13 03:43:01
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 # 需要新思路，如果之前的pid不存在，OR pid存在,但cmd不是$program, 说明后台进程被干了。

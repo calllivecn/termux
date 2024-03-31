@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # date 2023-07-10 22:35:46
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 CWD=$(cd $(dirname "${0}");pwd)
 cd ${CWD}

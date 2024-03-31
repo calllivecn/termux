@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2020-04-26 11:02:05
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 # 配置系统源

@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2023-01-09 05:56:39
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 termux-torch on
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2024-03-16 22:51:36
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 # 开关手机上的闪光灯
 # 有root 权限就很简单

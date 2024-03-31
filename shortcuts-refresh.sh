@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2023-01-09 05:19:26
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 # 使用这个工具生成 或 刷新 .shortcuts脚本
 # 

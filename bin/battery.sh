@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2023-07-08 18:27:28
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 get_timestamp(){
 python <<EOF

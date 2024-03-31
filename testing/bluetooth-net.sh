@@ -1,6 +1,6 @@
 #!/system/bin/sh
 # date 2021-01-06 15:08:12
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 BLUE_IFNAME="bt-pan"

@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # date 2023-01-08 09:05:43
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 # 目前遇到的问题，

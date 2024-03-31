@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/python
 # coding=utf-8
 # date 2021-08-09 12:30:21
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 import time
 import random

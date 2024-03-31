@@ -1,6 +1,6 @@
 #!/sbin/sh
 # date 2023-01-11 18:27:03
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 #SKIPUNZIP=1

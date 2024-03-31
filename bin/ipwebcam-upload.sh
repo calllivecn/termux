@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2022-08-15 20:05:48
-# author calllivecn <c-all@qq.com> 
+# author calllivecn <calllivecn@outlook.com> 
 
 
 # 0. 上传到网盘 

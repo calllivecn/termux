@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # date 2023-01-09 10:44:58
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 if [ -r $PREFIX/etc/hostname ];then

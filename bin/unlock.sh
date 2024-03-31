@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # date 2023-07-10 22:35:46
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 # 相接在root 或者shell 用户下运行就行了。

@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2023-01-13 21:04:22
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 SESSION="daemon"
 TMUX_SOCK=$HOME/.tmux.sock

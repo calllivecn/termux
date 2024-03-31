@@ -1,6 +1,6 @@
 #!/bin/bash
 # date 2019-11-29 18:53:39
-# author calllivecn <c-all@qq.com>
+# author calllivecn <calllivecn@outlook.com>
 
 
 WAKEUP_LOCK(){
