@@ -5,9 +5,12 @@ from typing import (
     List,
     TypeVar,
     Any,
+    Optional,
 )
 
+
 import time
+import enum
 import subprocess
 from io import BytesIO
 from pathlib import Path
@@ -18,6 +21,21 @@ import cv2
 # CV2IMG = TypeVar("T")
 CV2IMG = Any
 
+class KeyEvent(enum.IntEnum):
+
+
+    HOME = 3
+
+    # 返回键
+    BACK = 4
+
+    # 电源键
+    POWER = 26
+
+    # 224: 键码常量：唤醒键。唤醒设备。行为有点像 KEYCODE_POWER 但如果设备已经唤醒则没有任何效果。
+    WAKEUP = 224
+
+
 
 class AdbCmd:
     """
@@ -25,17 +43,25 @@ class AdbCmd:
     或者 直接在手机上通过root执行。 
     """
 
-    def __init__(self, adb=None):
+    def __init__(self, adb=Optional[str], serial=Optional[str]):
+        """
+        在adb 情况下，有多个设备时，可以指定serial
+        """
 
         self.input_prefix = ["input"]
 
         self.screenshot = ["screencap", "-p"]
 
         if adb is not None:
+            if serial is not None:
+                self.screenshot = [adb, "-s", serial, "shell"] + self.screenshot
+                self.input_prefix = [adb, "-s", serial, "shell"] + self.input_prefix
+
             self.screenshot = [adb, "shell"] + self.screenshot
+            self.input_prefix = [adb, "shell"] + self.input_prefix
+        
 
-            self.input_prefix = [adb] + self.input_prefix
-
+        self.interval = 1
 
     def get_screen(self) -> CV2IMG:
         p = subprocess.run(self.screenshot, stdout=subprocess.PIPE, check=True)
@@ -51,10 +77,23 @@ class AdbCmd:
         屏幕点击
         """
         subprocess.run(self.input_prefix + ["tap", str(x), str(y)], check=True)
+        self.sleep(self.interval)
     
-    def keyevent(self, code:int):
-        subprocess.run(self.input_prefix + ["keyevent", str(code)], check=True)
+    def keyevent(self, code: KeyEvent):
+        subprocess.run(self.input_prefix + ["keyevent", str(code.value)], check=True)
+        self.sleep(self.interval)
 
+    def swipe(self, x1, y1, x2, y2):
+        subprocess.run(self.input_prefix + ["swipe", str(x1), str(y1), str(x2), str(y2)], check=True)
+        self.sleep(self.interval)
+    
+    def text(self, text: str):
+        subprocess.run(self.input_prefix + ["text", text], check=True)
+        self.sleep(self.interval)
+
+
+    def sleep(self, s):
+        time.sleep(s)
     
 
 # cmd = AdbCmd()
@@ -70,7 +109,7 @@ class MatchTemplate:
 
         self.template_gray = cv2.cvtColor(self.template, cv2.COLOR_BGR2GRAY)
 
-        self.temp_w, self.temp_h = template.shape[1], template.shape[0]
+        self.temp_w, self.temp_h = self.template.shape[1], self.template.shape[0]
 
         self.threshold = threshold
 
@@ -83,12 +122,13 @@ class MatchTemplate:
         result = cv2.matchTemplate(target_gray, self.template_gray, cv2.TM_CCOEFF_NORMED)
 
         loc = np.where(result >= self.threshold)
-        # loc: (y: array([...]), x: array[...])
+        # loc: (y: array([...], dtype=int64), x: array([...], dtype=int64))
 
-        dedup_loc = self.__deduplication(loc, temp_size=(self.temp_w, self.temp_h))
-        # self.__draw_loction(target, temp_w, temp_h, dedup_loc)
-    
-        return dedup_loc
+        if len(loc[0]) > 1:
+            dedup_loc = self.__deduplication(loc, temp_size=(self.temp_w, self.temp_h))
+            return dedup_loc
+        else:
+            return loc
     
 
     def location(self, target: CV2IMG) -> List[Tuple[int, int]]:
@@ -172,7 +212,7 @@ class MatchTemplate:
         loc_dedup_x = [loc[1][0]]
         loc_dedup_y = [loc[0][0]]
 
-        print(f"{loc_dedup_x=} {loc_dedup_y=}")
+        # print(f"{loc_dedup_x=} {loc_dedup_y=}")
         for x, y in zip(*loc[::-1]):
             if (x - loc_dedup_x[-1]) <= temp_size[0] and (y - loc_dedup_y[-1]) <= temp_size[1]:
                 pass
@@ -197,16 +237,21 @@ class Workflow:
         3.  wait interval, wait timeout
     """
 
-    def __init__(self, temps_dir: Path = Path("temps")):
+    # def __init__(self, temps_dir: Path = Path("temps")):
+    def __init__(self, adbcmd: Optional[AdbCmd] = None):
         self._temps = {}
 
-        self._temps_dir = temps_dir
+        # self._temps_dir = temps_dir
+
 
         self.operate_inteval = 1
 
         self.timeout = 60
 
-        self.adb = AdbCmd()
+        if adbcmd is None:
+            self.adb = AdbCmd()
+        else:
+            self.adb = adbcmd
 
 
     def add_template(self, png: Path):
@@ -229,7 +274,7 @@ class Workflow:
             if target != ():
                 return target
 
-            if (end - start) <= self.timeout:
+            if (end - start) > self.timeout:
                 raise TimeoutError("没有等到目标出现")
 
             self.__interval()
