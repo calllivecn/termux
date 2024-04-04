@@ -42,7 +42,7 @@
 66: 回车键KEYCODE_ENTER
 
 
-82: KEYCODE_MENU
+82: KEYCODE_MENU, 也可以点亮屏幕
 
 224: 键码常量：唤醒键。唤醒设备。行为有点像 KEYCODE_POWER 但如果设备已经唤醒则没有任何效果。
 
