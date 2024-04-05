@@ -43,7 +43,7 @@ if [ "$timeout"x = falsex ];then
 fi
 
 
-# 启动太早了？目录还没挂载上来？
+# 启动太早了？目录还没挂载上来？yes
 if [ -d "$TERMUX_HOME/usr/bin" ];then
     export PATH=$PATH:$TERMUX_HOME/usr/bin
 else

@@ -1,6 +1,6 @@
 
 
-# 监听音量键
+# 监听音量键(不同安卓版本，或者，不同手机都需要实测后使用)
 LISTEN_FILE=/dev/input/event1
 
 
@@ -27,16 +27,35 @@ wifi_on_off(){
 }
 
 
-# 4: 开关 数据连接(没有实测)
+# 4: 开关 数据连接
 data_on_off(){
     local status
-    status=$(settings get global wifi_on)
+    status=$(settings get global mobile_data)
     if [ "$status"x = 1x ];then
-        svc wifi disable
+        svc data disable
     elif [ "$status"x = 0x ];then
-        svc wifi enable
+        svc data enable
     fi
 }
+
+# 5: 开关 蓝牙
+bluetooth_on_off(){
+    local status
+    status=$(settings get global bluetooth_on)
+    if [ "$status"x = 1x ];then
+        svc bluetooth disable
+    elif [ "$status"x = 0x ];then
+        svc bluetooth enable
+    fi
+}
+
+
+# 6: 开关 wifi热点(通过的opencv找图的方式实现)
+wifi_ap_on_off(){
+:
+}
+
+############################################################
 
 getch(){
     # 按下和松开会产生两次
@@ -91,13 +110,14 @@ do
 
     if [ "$result"x = "ok"x ];then
         count=$[count + 1]
-        echo "音量键被按下一次: ${count}"
+        #echo "音量键被按下一次: ${count}"
         vibrate
 
     elif [ "$result"x = "timeout"x ];then
         # 说明超时
-        echo "如果有指定向量就执行"
+        #echo "如果有指定向量就执行"
         if [ $count -ge 2 ];then
+            echo "调用向量: $count"
             vector $count
         fi
         count=0
