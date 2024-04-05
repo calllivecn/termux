@@ -55,6 +55,11 @@ wifi_ap_on_off(){
 :
 }
 
+# 7: 重启
+
+# 8: 关机
+
+
 ############################################################
 
 getch(){
@@ -100,6 +105,24 @@ vector(){
             # 开关wifi
             wifi_on_off
             ;;
+        4)
+            data_on_off
+            ;;
+        5)
+            bluetooth_on_off
+            ;;
+        6)
+            wifi_ap_on_off
+            ;;
+        7)
+            # 重启
+            svc power reboot
+            ;;
+        8)
+            # 关机
+            svc power shutdown
+            ;;
+
     esac
 }
 
