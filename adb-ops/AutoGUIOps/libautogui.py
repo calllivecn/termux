@@ -43,7 +43,7 @@ class AdbCmd:
     或者 直接在手机上通过root执行。 
     """
 
-    def __init__(self, adb=Optional[str], serial=Optional[str]):
+    def __init__(self, adb: Optional[str] = None, serial: Optional[str] = None):
         """
         在adb 情况下，有多个设备时，可以指定serial
         """
@@ -60,6 +60,7 @@ class AdbCmd:
             self.screenshot = [adb, "shell"] + self.screenshot
             self.input_prefix = [adb, "shell"] + self.input_prefix
         
+        print(f"{self.screenshot=}")
 
         self.interval = 1
 
