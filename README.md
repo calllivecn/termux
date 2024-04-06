@@ -1,7 +1,7 @@
 # termux
 
 - termux shell and config
-
+- 高阶的root后玩法
 
 # 执行 termux-setup-storage 获取手机存储权限
 
