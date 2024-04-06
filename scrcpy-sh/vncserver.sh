@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 0. 需要安装 tightvncserver
+# 1. 安装窗口管理 openbox openbox-menu xfce4-terminal
+
 # 一共3步
 
 # 初始化工作
