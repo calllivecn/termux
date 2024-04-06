@@ -33,6 +33,8 @@ check_tmux_daemon(){
     fi
 }
 
+termux-wake-lock
+
 if [ "$UID"x != "0"x ];then
     if check_tmux_daemon;then
         echo "tmux session: $SESSION alread start"
