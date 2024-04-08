@@ -19,5 +19,4 @@ resetprop -n sys.boot_from_charger_mode 1
 # 
 #   setprop sys.powerctl reboot #添加进这段
 
-#resetprop -n sys.powerctl reboot
 
