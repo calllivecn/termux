@@ -45,7 +45,8 @@ fi
 
 # 启动太早了？目录还没挂载上来？yes
 if [ -d "$TERMUX_HOME/usr/bin" ];then
-    export PATH=$PATH:$TERMUX_HOME/usr/bin
+    # TERMUX_HOME/usr/bin 需要在最前面，这里的很多命令依赖于termux
+    export PATH=$TERMUX_HOME/usr/bin:$PATH
 else
     log "termux app 没有安装？"
     exit 1
