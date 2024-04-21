@@ -62,6 +62,7 @@ fi
 
 export HOME="$TERMUX_HOME/root"
 notexists_make "$HOME"
+notexists_make "$HOME/.zx/logs"
 
 SESSION="daemon4root"
 
@@ -71,9 +72,9 @@ TMUX_SOCK="$HOME/.tmux.sock"
 # 查看有没有需要引导的 *.sh
 TERMUX_BOOT4ROOT="$HOME/.boot4root"
 if ls $TERMUX_BOOT4ROOT/*.sh >/dev/null 2>&1 ;then
-    log "开始引导termux for root 环境 ..."
+    log "开始引导termux for root 环境: ${TERMUX_BOOT4ROOT} ..."
 else
-    log "没有需要开机从root引导的*.sh"
+    log "没有需要开机从 ${TERMUX_BOOT4ROOT} 引导的*.sh"
     exit 0
 fi
 
