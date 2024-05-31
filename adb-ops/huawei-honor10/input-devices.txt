@@ -1,0 +1,4 @@
+音量按键包括上下键：/dev/input/event1
+电源：/dev/input/event2
+HOME 和 指纹：/dev/input/event3
+触摸屏输入：/dev/input/event5
