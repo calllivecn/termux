@@ -7,4 +7,10 @@
 - 6: 开关 wifi热点
 - 7: 重启
 - 8: 关机
+- 9: 禁用和启用。触摸屏和指纹输入(设置了在开机的时候自动启动)
+
+
+## 9.sh 在使用时的注意事项：
+    - 一个 disable-input-device.py 文件名只能用于禁用一个设备。（因为：pid,是根据文件名定的)
+    - 想要禁用多个设备，需要cp disable-input-device.py device2.py。
 

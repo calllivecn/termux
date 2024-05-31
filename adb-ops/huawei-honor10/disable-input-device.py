@@ -1,13 +1,20 @@
 
 import os
 import sys
+import signal
 from pathlib import Path
 
 import libevdev as ev
 
+def exit_clear(pid_file: Path):
+    if pid_file.exists:
+        os.remove(pid_file)
+    sys.exit(0)
 
 
 def disable_device(pid_file, path):
+
+    signal.signal(signal.SIGTERM, lambda sig, frame: exit_clear(pid_file))
 
     pid = os.getpid()
     # 保存下执行时的进程pid
@@ -35,7 +42,6 @@ def check_pid():
             prev_pid = int(f.read(100))
 
         os.kill(prev_pid, 15)
-
         print(f"kill完成，PID: {prev_pid}")
 
     else:
