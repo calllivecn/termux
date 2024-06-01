@@ -7,7 +7,7 @@ from pathlib import Path
 import libevdev as ev
 
 def exit_clear(pid_file: Path):
-    if pid_file.exists:
+    if pid_file.exists():
         os.remove(pid_file)
     sys.exit(0)
 
