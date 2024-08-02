@@ -15,8 +15,13 @@
 BATTERY_UEVENT=/sys/class/power_supply/Battery/uevent
 
 # 配置充电暂停开头
-CHARGER_OFF="echo 0 > /sys/class/hw_power/charger/charge_data/enable_charger"
-CHARGER_ON="echo 1 > /sys/class/hw_power/charger/charge_data/enable_charger"
+CHARGER_OFF(){
+    echo 0 > /sys/class/hw_power/charger/charge_data/enable_charger
+}
+
+CHARGER_ON(){
+    echo 1 > /sys/class/hw_power/charger/charge_data/enable_charger
+}
 
 #在让电池保持在指定范围里40%~60%
 BATTERY_KEEP_RANGE=(55 60)
@@ -104,7 +109,7 @@ battery_keep_monitor(){
             if [ "$CAPACITY" -lt "${BATTERY_KEEP_RANGE[0]}" ];then
                 show
                 log "开始充电..."
-                eval "$CHARGER_ON"
+                CHARGER_ON
             fi
 
         # 是在充电状态时
@@ -112,13 +117,14 @@ battery_keep_monitor(){
             if [ "$CAPACITY" -ge "${BATTERY_KEEP_RANGE[1]}" ];then
                 show
                 log "关闭充电..."
-                eval "$CHARGER_OFF"
+                CHARGER_OFF
             fi
         fi
 
         sleep 60
     done
 }
+
 
 main(){
     case "${1:-battery}" in 
@@ -132,6 +138,7 @@ main(){
             done
             ;;
         *)
+            trap CHARGER_ON EXIT
             battery_keep_monitor
             ;;
     esac
