@@ -5,6 +5,8 @@ wifi_on_off(){
     status=$(settings get global wifi_on)
     if [ "$status"x = 1x ];then
         svc wifi disable
+    elif [ "$status"x = 3x ];then
+        svc wifi disable
     elif [ "$status"x = 0x ];then
         svc wifi enable
     fi
