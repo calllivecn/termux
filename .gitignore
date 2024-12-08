@@ -4,4 +4,7 @@
 *.logs
 *.pid
 
+build/
+dist/
 __pycache__/
+
