@@ -6,6 +6,10 @@ if [ -d $HOME/bin ];then
 	export PATH=$HOME/bin:$PATH
 fi
 
+if [ -d $HOME/.local/bin ];then
+	export PATH=$HOME/.local/bin:$PATH
+fi
+
 # 设置termux hostname
 if [ -r $PREFIX/etc/hostname ];then
 	TERMUX_HOSTNAME=$(cat $PREFIX/etc/hostname)

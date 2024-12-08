@@ -4,11 +4,14 @@ import sys
 
 sys.path.append(".")
 
-from depends import get_datas
-
+from depends import (
+	get_datas,
+	get_supervisor,
+)
+d, ctl = get_supervisor()
 
 a = Analysis(
-    ['../.venv/pyinstaller/bin/supervisord'],
+    [d],
     pathex=[],
     binaries=[],
     datas=get_datas(),

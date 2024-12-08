@@ -16,4 +16,6 @@ pyinstaller supervisorctl.spec
 
 # 生成dist/目录下
 
+# ! 在执行时，需要设置临时目录 export TMP=/data/data/com.termux/files/usr/tmp
+
 ```

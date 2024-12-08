@@ -66,6 +66,8 @@ notexists_make "$HOME"
 export SUPERVISORD_ROOT="$HOME/.supervisord"
 notexists_make "$SUPERVISORD_ROOT"
 
+export TMP="$TERMUX_HOME/usr/tmp/"
+
 supervisord -c "$SUPERVISORD_ROOT/supervisord.ini" && log "supervisord 启动成功"
 
 
