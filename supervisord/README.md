@@ -8,6 +8,12 @@
 ## 初始化 准备工作
 
 - 把当前目录 cp -av 到 root/.supervisord/ 以安装 supervisod
+- cd root/.supervisord/
+- mkdir -vp logs inis
 
 
+## 然后在配置 inis/*.ini
+
+
+## 最后启动supervisord
 
