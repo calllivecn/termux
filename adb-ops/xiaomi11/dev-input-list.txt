@@ -1,0 +1,5 @@
+- /dev/input/event0 电源键+音量下
+- /dev/input/event4 触摸屏
+
+- /dev/input/event2 音量上
+
