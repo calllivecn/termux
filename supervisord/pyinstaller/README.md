@@ -19,3 +19,10 @@ pyinstaller supervisorctl.spec
 # ! 在执行时，需要设置临时目录 export TMP=/data/data/com.termux/files/usr/tmp
 
 ```
+
+
+# 更新：2025-01-22
+
+## 把多个脚本打包为可以执行文件，并在同一个--onedir 目录。
+
+- supervisor.spec
