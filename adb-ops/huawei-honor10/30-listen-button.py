@@ -95,7 +95,10 @@ class DisableInputDevice(Thread):
 
                 elif key.fileobj == self.r:
                     logger.info(f"安全退出线程：{self.name}")
+                    self.select.close()
                     os.close(fd)
+                    os.close(self.r)
+                    os.close(self.w)
                     break
 
 
