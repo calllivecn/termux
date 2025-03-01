@@ -1,6 +1,6 @@
 [program:test]
 command=bash %(ENV_SUPERVISORD_ROOT)s/test.sh
-
+autorestart=true
 redirect_stderr=true
 stdout_logfile=%(ENV_SUPERVISORD_ROOT)s/logs/%(program_name)s.log
 stdout_logfile_maxbytes=%(ENV_SUPERVISORD_LOG_SIZE)s
