@@ -71,6 +71,9 @@ if [ "$timeout"x = falsex ];then
     exit 1
 fi
 
+# 还是需要把TERMUX_HOME_USR_BIN 添加到 PATH
+export PATH=/data/data/com.termux/files/usr/bin:$PATH
+
 
 # set root in HOME
 export HOME="$TERMUX_HOME"
