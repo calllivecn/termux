@@ -1,6 +1,9 @@
 [program:test]
-command=bash %(ENV_SUPERVISORD_ROOT)s/test.sh
-autorestart=true
+command=env
+environment=ENV1="val1",ENV2="val2"
+startsecs=10
+startretries=30
+stopwaitsecs=10
 redirect_stderr=true
 stdout_logfile=%(ENV_SUPERVISORD_ROOT)s/logs/%(program_name)s.log
 stdout_logfile_maxbytes=%(ENV_SUPERVISORD_LOG_SIZE)s

@@ -83,7 +83,7 @@ if grep -qE "https://termux.org/" $SOURCES;then
 fi
 
 install_deb(){
-	apt install $(grep -Ev '^#|^$' termux-packages-backup.txt |tr '\n' ' ')
+	apt install $(grep -Ev '^#|^$' docs/termux-packages-backup.txt |tr '\n' ' ')
 }
 
 apt update
