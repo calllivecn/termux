@@ -9,6 +9,9 @@
 #am start -n net.christianbeier.droidvnc_ng/.MainActivity
 am start -n com.wireguard.android/.activity.MainActivity
 
+# 启动默认的 Activity 跟上包名就可以了
+# am start -p com.wireguard.android
+
 # 停止Activity...
 #am force-stop "$packagename"
 
