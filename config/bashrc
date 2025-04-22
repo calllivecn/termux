@@ -90,7 +90,8 @@ unset hashsum
 
 # 在 termux 使用 root 启动 sshd 时区分一下。
 if [  "$UID"x = "0"x ];then
-	export HOME=/data/data/com.termux/files/root
+	export HOME=/data/calllivecn
+	export TERMUX_HOME=/data/data/com.termux/files/home
 else
 	export HOME=/data/data/com.termux/files/home
 fi
@@ -122,3 +123,5 @@ xiyou(){
     set +x
 }
 
+
+alias termuxhome="cd $TERMUX_HOME"
