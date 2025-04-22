@@ -38,6 +38,8 @@ fi
 #########
 
 # ZhangXu Sun Dec 27 00:30:18 CST 2015
+#
+# termux 中的bash --login 时， 只会读取 /data/data/com.termux/files/home/.bashrc
 
 #########
 
