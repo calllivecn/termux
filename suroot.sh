@@ -20,3 +20,4 @@ cd $HOME
 unset CWD
 
 bash --init-file $HOME/.bashrc
+
