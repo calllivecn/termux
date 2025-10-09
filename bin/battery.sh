@@ -5,17 +5,19 @@
 get_timestamp(){
 python <<EOF
 import time
-print(time.time())
+print(time.monotonic())
 EOF
 }
+
+SLEEP_T="${1:-5}"
 
 sub(){
 python <<EOF
 i = $1 - $2
-if i > 5:
+if i > $SLEEP_T:
     print(0)
 else:
-    print(round(5 - i, 3))
+    print(round($SLEEP_T - i, 3))
 EOF
 }
 
