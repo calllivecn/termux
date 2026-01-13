@@ -23,6 +23,7 @@ def getlogger(level=logging.INFO):
 
 logger = getlogger()
 
+"""
 # 获取可执行文件所在的目录
 if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
     so_path = Path(sys._MEIPASS) / "so_dir" 
@@ -36,6 +37,7 @@ if 'LD_LIBRARY_PATH' in os.environ:
     os.environ['LD_LIBRARY_PATH'] = str(so_path) + os.pathsep + os.environ['LD_LIBRARY_PATH']
 else:
     os.environ['LD_LIBRARY_PATH'] = str(so_path)
+"""
 
 
 def disable_device(path: Path):
@@ -47,13 +49,17 @@ def disable_device(path: Path):
         devfd.grab()
 
         for e in devfd.events():
-            logger.debug(f"{e}")
+            if logger.level >= logging.DEBUG:
+                logger.debug(f"{e}")
 
 
 def main():
     parse = argparse.ArgumentParser(usage="%(prog)s --help")
     parse.add_argument("--debug", action="store_true", help="开启debug日志")
-    parse.add_argument("devs", nargs="+", help="/dev/input/XXX")
+    groups = parse.add_mutually_exclusive_group(required=True)
+    groups.add_argument("--toml", action="store", help="指定配置文件")
+    groups.add_argument("devs", nargs="+", help="/dev/input/XXX")
+    
     args = parse.parse_args()
 
     if args.debug:
