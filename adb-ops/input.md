@@ -1,12 +1,12 @@
-# input 命令使用 
+# input 命令使用
 
 - 这是文档：https://developer.android.com/reference/android/view/KeyEvent
 
-## keyevent <code> 和安卓版本， 设备有关。
+## keyevent `code` 和安卓版本， 设备有关。
 
-- keyevent <code>
+- keyevent `code`
 
-```
+```text
 3：HOME 键
 4：返回键
 
@@ -48,11 +48,9 @@
 
 ```
 
-
-
 - wm 命令
 
-```
+```text
 您可以使用 ADB 工具和 wm 命令来暂时禁用 Android 设备的屏幕输入。首先，您需要在电脑上安装 ADB 工具并确保您的手机已经开启了 USB 调试模式。然后，您可以按照以下步骤操作：
 
 将手机连接到电脑。
@@ -67,6 +65,3 @@ Physical size: 1080x2280
 Override size: 720x1520
 
 ```
-
-
-
