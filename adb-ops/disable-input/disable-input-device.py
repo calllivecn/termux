@@ -4,8 +4,12 @@ import sys
 import logging
 import argparse
 import threading
-import toml
+import tomllib
 from pathlib import Path
+
+from typing import (
+    Literal
+)
 
 import libevdev as ev
 
@@ -40,10 +44,32 @@ else:
     os.environ['LD_LIBRARY_PATH'] = str(so_path)
 """
 
-def find_device_path(devname: str = "", vid: int = -1, pid: int = -1) -> list[str]:
+def find_device_path(name: str = "", vid: int = -1, pid: int = -1) -> str:
+    """
+    3种使用方式：
+    1. 设备名过滤
+    2. 或者使用 vid + pid 过滤。
+    3. 设备名 + vid + pid 过滤。
 
-    if devname == "" and vid == -1 and pid == -1:
-        raise ValueError(f"需要有 <devname> or <vid> <pid>")
+    return: 返回 "" 空串，说明匹配的设备。
+    """
+
+    filter_method: Literal["1", "2", "3"]
+    if name != "" and vid != -1 and pid != -1:
+        #使用3方式
+        filter_method = "3"
+    
+    elif vid != -1 and pid != -1:
+        filter_method = "2"
+
+    elif name != "":
+        filter_method = "1"
+
+    elif name == "" and vid == -1 and pid == -1:
+        raise ValueError(f"需要有 <name> or <vid> <pid>")
+    else:
+        raise ValueError(f"需要有 <name> or <vid> <pid>")
+    
 
     baseinput="/dev/input"
 
@@ -54,7 +80,6 @@ def find_device_path(devname: str = "", vid: int = -1, pid: int = -1) -> list[st
             inputs.append(devpath)
     
 
-    devs: list[ev.Device] = []
     for devnode in inputs:
         with open(devnode, "rb") as fp:
             try:
@@ -62,19 +87,30 @@ def find_device_path(devname: str = "", vid: int = -1, pid: int = -1) -> list[st
                 device = ev.Device(fp)
 
                 # 获取设备信息
-                vid = device.id["vendor"]
-                pid = device.id["product"]
-                bus = device.id["bustype"]
+                dev_vid = device.id["vendor"]
+                dev_pid = device.id["product"]
+                # dev_bus = device.id["bustype"]
 
-                if devname != "":
-                    if devname == device.name:
+                match filter_method:
+
+                    case "1":
+                        if name == device.name:
+                            return devnode
+                    
+                    case "2":
+                        if vid == dev_vid and pid == dev_pid:
+                            return devnode
+
+                    case "3":
+                        if name == device.name and vid == dev_vid and pid == dev_pid:
+                            return devnode
 
             except OSError as e:
                 logger.warning(f"{devnode=} [Error: {e}]")
             except Exception as e:
                 logger.warning(f"{devnode=} [Error: {e}]")
 
-    return devs
+    return ""
 
 
 
@@ -91,6 +127,25 @@ def disable_device(path: Path):
             if logger.level >= logging.DEBUG:
                 logger.debug(f"{e}")
 
+CONFIG="""\
+配置文件示例：
+
+[[devnode]]
+
+# 这里 name 和 vid pid 是可选的。
+#   3种使用方式：
+#   1. 设备名过滤
+#   2. 或者使用 vid + pid 过滤。
+#   3. 设备名 + vid + pid 过滤。
+
+name = "Microsoft X-Box 360 pad"
+vid = 0x9834
+pid = 0x8837
+
+[[devnode]]
+# 如果有多个设备。可以添加多个配置。
+
+"""
 
 def main():
     parse = argparse.ArgumentParser(usage="%(prog)s")
@@ -105,25 +160,47 @@ def main():
     if args.parse:
         logger.info(f"{args}")
         sys.exit(0)
-    
-    if args.toml is None and args.devs is None:
-        parse.print_help()
-        logger.error(" 使用 配置文件 方式和 指定设备节点 方式，必须有一项。(两种方式都指定了，使用 配置文件 方式)")
-        sys.exit(1)
-    elif args.toml:
-        devs = toml.load(args.toml)
-    elif args.devs:
-        devs = args.devs
-    else:
-        logger.error("未知错误")
-
 
     if args.debug:
         logger.setLevel(logging.DEBUG)
 
     
+    devs: list[str] = []
+    if args.toml is None and args.devs is None:
+        parse.print_help()
+        logger.error(" 使用 配置文件 方式和 指定设备节点 方式，必须有一项。(两种方式都指定了，使用 配置文件 方式)")
+        logger.info(f"{CONFIG}")
+        sys.exit(1)
+
+
+    elif args.toml:
+        cfg = Path(args.toml)
+        if cfg.exists():
+            with open(cfg, "rb") as f:
+                cfg_devnode = tomllib.load(f)
+
+            logger.debug(f"{cfg_devnode=}")
+            cfg_devs: list[dict[str, str|int]] = cfg_devnode["devname"]
+            for dev in cfg_devs:
+                result_dev = find_device_path(**dev)
+                if result_dev != "":
+                    devs.append(result_dev)
+
+        else:
+            logger.info(f"{CONFIG}")
+            logger.error(f"配置文件 {args.toml} 不存在。")
+            sys.exit(1)
+
+    elif args.devs:
+
+        devs = args.devs
+
+    else:
+        logger.error("未知错误")
+
+    
     threads: list[threading.Thread] = []
-    for dev in args.devs:
+    for dev in devs:
         th = threading.Thread(target=disable_device, args=(Path(dev),))
         th.start()
         threads.append(th)
