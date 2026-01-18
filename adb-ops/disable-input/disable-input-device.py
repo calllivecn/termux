@@ -5,10 +5,12 @@ import logging
 import argparse
 import threading
 import tomllib
+import fcntl
 from pathlib import Path
 
 from typing import (
-    Literal
+    Literal,
+    BinaryIO,
 )
 
 import libevdev as ev
@@ -27,6 +29,15 @@ def getlogger(level=logging.INFO):
 
 
 logger = getlogger()
+
+
+# 设置为非阻塞模式
+def open_nonblocking(devpath: Path) -> BinaryIO:
+    fd = open(devpath, 'rb')
+    flags = fcntl.fcntl(fd.fileno(), fcntl.F_GETFL, 0)
+    fcntl.fcntl(fd.fileno(), fcntl.F_SETFL, flags | os.O_NONBLOCK)
+    return fd
+
 
 """
 # 获取可执行文件所在的目录
