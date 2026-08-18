@@ -41,7 +41,7 @@ def get_localized_app_label():
             elif label_app:
                 final_label = label_app.group(1)
 
-            print(f"{final_label:<20} | {pkg_name}")
+            print(f"{final_label:<20}|{pkg_name}")
 
         except:
             continue
