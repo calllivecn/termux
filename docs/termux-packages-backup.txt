@@ -20,3 +20,5 @@ vim
 pv
 python-cryptography
 python-numpy
+iproute2
+dnsutils
