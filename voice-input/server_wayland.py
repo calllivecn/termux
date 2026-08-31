@@ -66,23 +66,30 @@ def check_deps() -> None:
 
 def inject_text(text: str) -> None:
     """wl-copy 写入剪贴板，再 wl-paste 注入当前焦点窗口"""
-    p = subprocess.Popen(
-        ["wl-copy"],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.PIPE,
-    )
-    _, err = p.communicate(text.encode("utf-8"))
-    if p.returncode != 0:
-        print(f"   ⚠️  wl-copy 失败: {err.decode(errors='replace').strip()}")
+    p = subprocess.Popen(["wl-copy"], stdin=subprocess.PIPE)
+    #_, err = p.communicate(text.encode("utf-8"))
+
+    # 写入数据后立即关闭 stdin，通知 wl-copy 数据已完毕
+    try:
+        p.stdin.write(text.encode("utf-8"))
+        p.stdin.close()
+    except BrokenPipeError:
+        print("   ⚠️  wl-copy stdin 写入失败")
         return
 
-    cmd = ["wl-paste"]
+    print("等待wl-copy执行后退出")
+    p.wait()
+
+    if p.returncode != 0:
+        print(f"   ⚠️  wl-copy 失败")
+        return
+
+    #cmd = ["wl-paste"]
     cmd = ["mouse.pyz", "--ctrlkey", "v"]
 
     result = subprocess.run(cmd, capture_output=True)
     if result.returncode != 0:
-        print(f"   ⚠️  {cmd} 失败: {result.stderr.decode(errors='replace').strip()}")
+        print(f"   ⚠️  {cmd} 失败 为什么？")
     else:
         print(f"   ✅ 注入成功: {text}")
 
@@ -102,6 +109,7 @@ def handle_client(conn: socket.socket, addr, secret: str) -> None:
         # 循环接收文本并注入
         while True:
             text = recv_str(conn)
+            print(f"接收到的文本: {text}")
             if text.strip():
                 inject_text(text)
     except ConnectionError:
