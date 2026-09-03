@@ -9,8 +9,9 @@
 #
 #
 
-PROGRM="termux-tts-speak"
-FIFO="$HOME/.zx/tmp/fifo-tts"
+PROGRM="termux-tts-speak -s MUSIC"
+
+FIFO="$TMPDIR/fifo-tts"
 
 if [ -p $FIFO ];then
 	:
@@ -40,11 +41,17 @@ close(){
 	exec 9>&-
 }
 
+safe_exit(){
+	close
+
+	rm -v "$FIFO"
+}
+
 
 # 解决问题2
 service2(){
 	openfile
-	trap close EXIT
+	trap safe_exit EXIT
 
 	local text
 	while :

@@ -3,8 +3,18 @@
 # author calllivecn <calllivecn@outlook.com>
 
 SESSION="daemon"
-TMUX_SOCK=$HOME/.tmux.sock
-TMUX_BOOT_LOG="$HOME/.zx/logs/boot.logs"
+AUTOSTART_DIR="$HOME/.autostart_env_dir"
+TMUX_SOCK="$HOME/.tmux.sock"
+TMUX_BOOT_LOG="$AUTOSTART_DIR/boot.logs"
+
+if [ -d "$AUTOSTART_DIR" ];then
+	echo "环境目录: ${AUTOSTART_DIR} 已经存在"
+else
+	echo "环境目录: ${AUTOSTART_DIR} 不存在, 现在创建。"
+	mkdir -vp "${AUTOSTART_DIR}"
+fi
+
+
 
 log(){
     echo "$(date +%F_%X): $@" >> $TMUX_BOOT_LOG
